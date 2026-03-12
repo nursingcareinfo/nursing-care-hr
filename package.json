@@ -8,7 +8,8 @@
         "export:sheets": "node scripts/export_to_sheets.js",
         "export:supabase": "node scripts/export_to_supabase.js",
         "export:supabase:reset": "node scripts/export_to_supabase.js --reset",
-        "export:supabase:status": "node scripts/export_to_supabase.js --status"
+        "export:supabase:status": "node scripts/export_to_supabase.js --status",
+        "export:contacts": "node scripts/export_google_contacts.js"
     },
     "dependencies": {
         "@supabase/supabase-js": "^2.98.0",
