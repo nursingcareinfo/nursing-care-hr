@@ -1,0 +1,129 @@
+{
+  "name": "WhatsApp Webhook Handler",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "whatsapp-webhook",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-get",
+      "name": "Webhook GET",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "webhookId": "whatsapp-webhook-get"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "whatsapp-webhook",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-post",
+      "name": "Webhook POST",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 450],
+      "webhookId": "whatsapp-webhook-post"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Handle WhatsApp webhook verification (GET request)\nconst query = $input.first().json.query;\nconst verifyToken = 'nursingcare_whatsapp';\n\nif (query['hub.mode'] === 'subscribe' && query['hub.verify_token'] === verifyToken) {\n  // Return the challenge as plain text\n  return {\n    body: query['hub.challenge'],\n    headers: { 'Content-Type': 'text/plain' },\n    statusCode: 200\n  };\n}\n\nreturn {\n  body: 'Verification failed',\n  statusCode: 403\n};"
+      },
+      "id": "verify-webhook",
+      "name": "Verify Webhook",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Handle incoming WhatsApp messages (POST request)\nconst body = $input.first().json;\n\n// Extract message data\nlet response = {\n  received: true,\n  entries: []\n};\n\ntry {\n  if (body.entry && body.entry.length > 0) {\n    for (const entry of body.entry) {\n      if (entry.changes && entry.changes.length > 0) {\n        const value = entry.changes[0].value;\n        \n        if (value.messages) {\n          for (const msg of value.messages) {\n            response.entries.push({\n              from: msg.from,\n              type: msg.type,\n              text: msg.text?.body,\n              timestamp: msg.timestamp,\n              messageId: msg.id\n            });\n          }\n        }\n      }\n    }\n  }\n} catch (e) {\n  response.error = e.message;\n}\n\nreturn response;"
+      },
+      "id": "process-message",
+      "name": "Process Message",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [450, 450]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}"
+      },
+      "id": "respond-ok",
+      "name": "Respond OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}"
+      },
+      "id": "respond-msg",
+      "name": "Respond Message",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [650, 450]
+    }
+  ],
+  "connections": {
+    "Webhook GET": {
+      "main": [
+        [
+          {
+            "node": "Verify Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook POST": {
+      "main": [
+        [
+          {
+            "node": "Process Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verify Webhook": {
+      "main": [
+        [
+          {
+            "node": "Respond OK",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process Message": {
+      "main": [
+        [
+          {
+            "node": "Respond Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 2,
+  "updatedAt": "2026-03-10T13:50:00",
+  "versionId": "1"
+}

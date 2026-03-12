@@ -1,0 +1,256 @@
+{
+    "name": "HR Staff Intake - Baserow Integration",
+    "nodes": [
+        {
+            "parameters": {},
+            "name": "Start",
+            "type": "n8n-nodes-base.start",
+            "typeVersion": 1,
+            "position": [
+                250,
+                300
+            ]
+        },
+        {
+            "parameters": {
+                "httpMethod": "POST",
+                "path": "hr-staff-intake",
+                "responseMode": "lastNode",
+                "options": {}
+            },
+            "name": "Webhook",
+            "type": "n8n-nodes-base.webhook",
+            "typeVersion": 1,
+            "position": [
+                450,
+                300
+            ],
+            "webhookId": "hr-staff-intake"
+        },
+        {
+            "parameters": {
+                "functionCode": "const item = items[0].json;\n\n// Validate required fields\nconst required = ['assigned_id', 'name', 'designation', 'contact1'];\nconst missing = required.filter(field => !item[field]);\n\nif (missing.length > 0) {\n  throw new Error(`Missing required fields: ${missing.join(', ')}`);\n}\n\n// Clean and validate data\nconst cleaned = {\n  assigned_id: item.assigned_id.trim().toUpperCase(),\n  name: item.name.trim(),\n  father_husband_name: item.father_husband_name?.trim() || null,\n  date_of_birth: item.date_of_birth || null,\n  gender: item.gender?.trim() || null,\n  cnic: item.cnic?.replace(/[- ]/g, '') || null,\n  designation: item.designation?.trim() || null,\n  contact_1: item.contact1?.replace(/[- ]/g, '') || null,\n  contact_2: item.contact2?.replace(/[- ]/g, '') || null,\n  district: item.district?.trim() || null,\n  hourly_rate: parseFloat(item.hourly_rate) || null,\n  status: 'Pending Approval',\n  hire_date: item.hire_date || null,\n  notes: item.notes?.trim() || null\n};\n\n// CNIC validation (Pakistan format: 12345-1234567-1)\nif (cleaned.cnic && !/^\\d{13}$/.test(cleaned.cnic)) {\n  throw new Error('Invalid CNIC format. Expected: 1234512345671 (13 digits)');\n}\n\n// Contact validation\nif (cleaned.contact_1 && !/^\\d{11}$/.test(cleaned.contact_1)) {\n  throw new Error('Invalid contact number. Expected: 03001234567 (11 digits)');\n}\n\nreturn [{ json: cleaned }];"
+            },
+            "name": "Validate & Clean Data",
+            "type": "n8n-nodes-base.function",
+            "typeVersion": 1,
+            "position": [
+                650,
+                300
+            ]
+        },
+        {
+            "parameters": {
+                "method": "POST",
+                "url": "={{ $env.BASEROW_URL }}/api/database/rows/table/{{ $env.BASEROW_TABLE_ID }}/",
+                "authentication": "genericCredentialType",
+                "genericAuthType": "httpHeaderAuth",
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "Authorization",
+                            "value": "Token {{ $env.BASEROW_TOKEN }}"
+                        }
+                    ]
+                },
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={{ $json }}",
+                "options": {}
+            },
+            "name": "Create in Baserow",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 1,
+            "position": [
+                850,
+                300
+            ],
+            "credentials": {
+                "httpHeaderAuth": {
+                    "id": "baserow-auth",
+                    "name": "Baserow API Token"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "method": "POST",
+                "url": "={{ $env.SUPABASE_URL }}/rest/v1/staff",
+                "authentication": "genericCredentialType",
+                "genericAuthType": "httpHeaderAuth",
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "apikey",
+                            "value": "{{ $env.SUPABASE_SERVICE_KEY }}"
+                        },
+                        {
+                            "name": "Authorization",
+                            "value": "Bearer {{ $env.SUPABASE_SERVICE_KEY }}"
+                        },
+                        {
+                            "name": "Prefer",
+                            "value": "return=representation"
+                        }
+                    ]
+                },
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={{ $json }}",
+                "options": {}
+            },
+            "name": "Backup to Supabase",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 1,
+            "position": [
+                1050,
+                300
+            ],
+            "credentials": {
+                "httpHeaderAuth": {
+                    "id": "supabase-auth",
+                    "name": "Supabase Service Key"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "method": "POST",
+                "url": "https://script.google.com/macros/s/AKfycbyfEZPO7SO3VQvDUdVfd9VkIRglFLcLRku9oi9QJpn-ZNycetUK8uXfUBV_WgXO05BaIg/exec",
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={{ $json }}",
+                "options": {}
+            },
+            "name": "Sync to Google Sheets",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 1,
+            "position": [
+                1250,
+                300
+            ]
+        },
+        {
+            "parameters": {
+                "from": "hr@nursingcare.pk",
+                "to": "={{ $json.email || 'hr@nursingcare.pk' }}",
+                "subject": "New Staff Member Added - {{ $json.assigned_id }}",
+                "emailType": "html",
+                "html": "<h2>New Staff Member Submitted</h2><p><strong>Assigned ID:</strong> {{ $json.assigned_id }}</p><p><strong>Name:</strong> {{ $json.name }}</p><p><strong>Designation:</strong> {{ $json.designation }}</p><p><strong>District:</strong> {{ $json.district }}</p><p><strong>Status:</strong> Pending Approval</p><p>Please review and approve in Baserow.</p>"
+            },
+            "name": "Notify HR",
+            "type": "n8n-nodes-base.emailSend",
+            "typeVersion": 1,
+            "position": [
+                1450,
+                300
+            ]
+        },
+        {
+            "parameters": {
+                "respondWith": "json",
+                "responseBody": "{\n  \"success\": true,\n  \"message\": \"Staff member submitted successfully\",\n  \"assigned_id\": \"{{ $json.assigned_id }}\",\n  \"status\": \"Pending Approval\"\n}"
+            },
+            "name": "Respond to Webhook",
+            "type": "n8n-nodes-base.respondToWebhook",
+            "typeVersion": 1,
+            "position": [
+                1650,
+                300
+            ]
+        }
+    ],
+    "connections": {
+        "Start": {
+            "main": [
+                [
+                    {
+                        "node": "Webhook",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Webhook": {
+            "main": [
+                [
+                    {
+                        "node": "Validate & Clean Data",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Validate & Clean Data": {
+            "main": [
+                [
+                    {
+                        "node": "Create in Baserow",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Create in Baserow": {
+            "main": [
+                [
+                    {
+                        "node": "Backup to Supabase",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Backup to Supabase": {
+            "main": [
+                [
+                    {
+                        "node": "Sync to Google Sheets",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Sync to Google Sheets": {
+            "main": [
+                [
+                    {
+                        "node": "Notify HR",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Notify HR": {
+            "main": [
+                [
+                    {
+                        "node": "Respond to Webhook",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    },
+    "settings": {
+        "executionOrder": "v1"
+    },
+    "staticData": null,
+    "tags": [
+        "HR",
+        "Staff Intake",
+        "Baserow"
+    ],
+    "triggerCount": 1,
+    "updatedAt": "2026-03-02T19:00:00.000Z",
+    "versionId": "hr-intake-baserow-v1"
+}

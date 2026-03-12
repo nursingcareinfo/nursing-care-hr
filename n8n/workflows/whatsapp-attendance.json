@@ -1,0 +1,259 @@
+{
+  "name": "WhatsApp Attendance Check-in",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "whatsapp-attendance",
+        "responseMode": "onComplete"
+      },
+      "id": "webhook",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "code": "const message = $input.first().json;\nconst msgText = (message.message || '').toUpperCase().trim();\nconst from = message.from.replace('@s.whatsapp.net', '').replace('@c.us', '');\n\nreturn [{\n  phone: from,\n  command: msgText\n}];"
+      },
+      "id": "parse",
+      "name": "Parse Command",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 3,
+      "position": [500, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.command }}",
+              "operation": "equal",
+              "value2": "IN"
+            }
+          ]
+        }
+      },
+      "id": "if-in",
+      "name": "If Check-In",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [750, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://ifvqnxcsjdvfpmmzuwlx.supabase.co/rest/v1/attendance_logs",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlmdnFueGNzamR2ZnBtbXp1d2x4Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MjIwNDkwNywiZXhwIjoyMDg3NzgwOTA3fQ.EXrvcHU2aqabHTk_UCpz8RNwh-sn_x17ZE9eM8LyQjw"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlmdnFueGNzamR2ZnBtbXp1d2x4Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MjIwNDkwNywiZXhwIjoyMDg3NzgwOTA3fQ.EXrvcHU2aqabHTk_UCpz8RNwh-sn_x17ZE9eM8LyQjw"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "return=minimal"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "staff_phone",
+              "value": "={{ $json.phone }}"
+            },
+            {
+              "name": "check_in",
+              "value": "={{ $now.toISO() }}"
+            },
+            {
+              "name": "shift_date",
+              "value": "={{ $now.toFormat('yyyy-MM-dd') }}"
+            },
+            {
+              "name": "status",
+              "value": "active"
+            }
+          ]
+        }
+      },
+      "id": "check-in",
+      "name": "Check In to DB",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1000, 200]
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "https://ifvqnxcsjdvfpmmzuwlx.supabase.co/rest/v1/attendance_logs?staff_phone=eq.{{ $json.phone }}&status=eq.active",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlmdnFueGNzamR2ZnBtbXp1d2x4Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MjIwNDkwNywiZXhwIjoyMDg3NzgwOTA3fQ.EXrvcHU2aqabHTk_UCpz8RNwh-sn_x17ZE9eM8LyQjw"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlmdnFueGNzamR2ZnBtbXp1d2x4Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MjIwNDkwNywiZXhwIjoyMDg3NzgwOTA3fQ.EXrvcHU2aqabHTk_UCpz8RNwh-sn_x17ZE9eM8LyQjw"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "return=minimal"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "check_out",
+              "value": "={{ $now.toISO() }}"
+            },
+            {
+              "name": "status",
+              "value": "completed"
+            }
+          ]
+        }
+      },
+      "id": "check-out",
+      "name": "Check Out from DB",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1000, 400]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:8080/message/sendText/NursingCare",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "evolution_nursingcare_2026"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "number",
+              "value": "={{ $json.phone }}@s.whatsapp.net"
+            },
+            {
+              "name": "text",
+              "value": "={{ $json.message }}"
+            }
+          ]
+        }
+      },
+      "id": "send-response",
+      "name": "Send WhatsApp Response",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1250, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\"status\": \"ok\"}"
+      },
+      "id": "respond",
+      "name": "Respond",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1500, 300]
+    }
+  ],
+  "connections": {
+    "Parse Command": {
+      "main": [
+        [
+          {
+            "node": "If Check-In",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Check-In": {
+      "main": [
+        [
+          {
+            "node": "Check In to DB",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Check Out from DB",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check In to DB": {
+      "main": [
+        [
+          {
+            "node": "Send WhatsApp Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Out from DB": {
+      "main": [
+        [
+          {
+            "node": "Send WhatsApp Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send WhatsApp Response": {
+      "main": [
+        [
+          {
+            "node": "Respond",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-03-12T21:25:00.000Z",
+  "versionId": "1"
+}

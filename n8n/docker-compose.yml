@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: n8n-nursingcare
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_HOST=0.0.0.0
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - NODE_ENV=production
+      - WEBHOOK_URL=http://localhost:5678/
+      # Supabase Configuration
+      - SUPABASE_URL=https://ifvqnxcsjdvfpmmzuwlx.supabase.co
+      # Google Sheets / Apps Script
+      - GOOGLE_SHEETS_WEB_APP_URL=${GOOGLE_SHEETS_WEB_APP_URL:-https://script.google.com/macros/s/AKfycbyj9GDz9XHuEcgMOFeapiBHxri9JAbSpQwVQwWs86TE9o6ccAeH8oTDUO9pPZp3dqTEDg/exec}
+    volumes:
+      - n8n_data:/home/node/.n8n
+    networks:
+      - nursingcare_network
+
+volumes:
+  n8n_data:
+    driver: local
+
+networks:
+  nursingcare_network:
+    driver: bridge

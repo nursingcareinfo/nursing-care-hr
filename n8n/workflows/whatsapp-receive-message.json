@@ -1,0 +1,71 @@
+{
+  "name": "WhatsApp Receive Message",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "whatsapp-webhook",
+        "responseMode": "onComplete",
+        "options": {}
+      },
+      "id": "webhook",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "code": "const body = $input.first().json;\n\nconst messageData = body.message || {};\nconst key = body.key || {};\n\nconst message = {\n  from: key.remoteJid,\n  message: messageData.conversation || messageData.extendedTextMessage?.text || '',\n  timestamp: body.messageTimestamp,\n  pushName: body.pushName\n};\n\nreturn [message];"
+      },
+      "id": "process",
+      "name": "Process Message",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 3,
+      "position": [500, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\"status\": \"received\"}"
+      },
+      "id": "respond",
+      "name": "Respond",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [750, 300]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Process Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process Message": {
+      "main": [
+        [
+          {
+            "node": "Respond",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-03-12T21:15:00.000Z",
+  "versionId": "1"
+}

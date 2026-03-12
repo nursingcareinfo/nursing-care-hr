@@ -1,0 +1,90 @@
+{
+    "name": "Export Master Staff to Sheets",
+    "nodes": [
+        {
+            "parameters": {},
+            "name": "Start",
+            "type": "n8n-nodes-base.start",
+            "typeVersion": 1,
+            "position": [
+                250,
+                300
+            ]
+        },
+        {
+            "parameters": {
+                "fileSelector": "/home/archbtw/dev/HR_manager_home_nursing_care/data/master_report/master_staff_report.md"
+            },
+            "name": "Read Master Report",
+            "type": "n8n-nodes-base.readBinaryFile",
+            "typeVersion": 1,
+            "position": [
+                450,
+                300
+            ]
+        },
+        {
+            "parameters": {
+                "functionCode": "const binaryData = items[0].binary.data;\nconst content = Buffer.from(binaryData.data, 'base64').toString('utf8');\nconst lines = content.split('\\n').filter(line => line.trim() && line.includes('|') && !line.includes('---') && !line.includes('Assigned ID'));\n\nreturn lines.map(line => {\n  const cols = line.split('|').map(c => c.trim()).filter(Boolean);\n  return {\n    json: {\n      assignedId: cols[0],\n      name: cols[1],\n      fatherHusbandName: cols[2],\n      dob: cols[3],\n      gender: cols[4],\n        cnic: cols[5],\n        designation: cols[6],\n        contact1: cols[7],\n        district: cols[8]\n    }\n  };\n});"
+            },
+            "name": "Parse Markdown",
+            "type": "n8n-nodes-base.function",
+            "typeVersion": 1,
+            "position": [
+                650,
+                300
+            ]
+        },
+        {
+            "parameters": {
+                "requestMethod": "POST",
+                "url": "https://script.google.com/macros/s/AKfycbyfEZPO7SO3VQvDUdVfd9VkIRglFLcLRku9oi9QJpn-ZNycetUK8uXfUBV_WgXO05BaIg/exec",
+                "jsonParameters": true,
+                "options": {},
+                "bodyParametersJson": "={{$json}}"
+            },
+            "name": "Post to Sheets API",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 1,
+            "position": [
+                850,
+                300
+            ]
+        }
+    ],
+    "connections": {
+        "Start": {
+            "main": [
+                [
+                    {
+                        "node": "Read Master Report",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Read Master Report": {
+            "main": [
+                [
+                    {
+                        "node": "Parse Markdown",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Parse Markdown": {
+            "main": [
+                [
+                    {
+                        "node": "Post to Sheets API",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    }
+}

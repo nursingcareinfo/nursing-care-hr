@@ -1,0 +1,91 @@
+<h2><?= ctx.resource.id ? 'Edit' : 'Add' ?> Staff</h2>
+
+<form action="<?= ctx.formLink ?>" method="post" class="row g-3">
+
+  <div class="col-md-6">
+    <label class="form-label">Assigned ID</label>
+    <input type="text" name="assignedId" class="form-control" value="<?= ctx.resource.assignedId ?>" readonly>
+  </div>
+
+  <div class="col-md-6">
+    <label class="form-label">Status</label>
+    <select name="status" class="form-select">
+      <option value="active" <?= ctx.resource.status === 'active' ? 'selected' : '' ?>>Active</option>
+      <option value="inactive" <?= ctx.resource.status === 'inactive' ? 'selected' : '' ?>>Inactive</option>
+      <option value="on-leave" <?= ctx.resource.status === 'on-leave' ? 'selected' : '' ?>>On Leave</option>
+    </select>
+  </div>
+
+  <div class="col-md-6">
+    <label class="form-label">Name *</label>
+    <input type="text" name="name" class="form-control" value="<?= ctx.resource.name || '' ?>" required>
+  </div>
+
+  <div class="col-md-6">
+    <label class="form-label">Father/Husband Name</label>
+    <input type="text" name="fatherHusbandName" class="form-control" value="<?= ctx.resource.fatherHusbandName || '' ?>">
+  </div>
+
+  <div class="col-md-4">
+    <label class="form-label">Date of Birth</label>
+    <input type="date" name="dateOfBirth" class="form-control" value="<?= ctx.resource.dateOfBirth || '' ?>">
+  </div>
+
+  <div class="col-md-4">
+    <label class="form-label">Gender</label>
+    <select name="gender" class="form-select">
+      <option value="">Select...</option>
+      <option value="Male" <?= ctx.resource.gender === 'Male' ? 'selected' : '' ?>>Male</option>
+      <option value="Female" <?= ctx.resource.gender === 'Female' ? 'selected' : '' ?>>Female</option>
+    </select>
+  </div>
+
+  <div class="col-md-4">
+    <label class="form-label">CNIC</label>
+    <input type="text" name="cnic" class="form-control" placeholder="XXXXX-XXXXXXX-X" value="<?= ctx.resource.cnic || '' ?>">
+  </div>
+
+  <div class="col-md-6">
+    <label class="form-label">Designation</label>
+    <select name="designation" class="form-select">
+      <option value="">Select...</option>
+      <option value="R/N" <?= ctx.resource.designation === 'R/N' ? 'selected' : '' ?>>R/N (Registered Nurse)</option>
+      <option value="Nurse Assistant" <?= ctx.resource.designation === 'Nurse Assistant' ? 'selected' : '' ?>>Nurse Assistant</option>
+      <option value="Attendant" <?= ctx.resource.designation === 'Attendant' ? 'selected' : '' ?>>Attendant</option>
+      <option value="Mid Wife" <?= ctx.resource.designation === 'Mid Wife' ? 'selected' : '' ?>>Mid Wife</option>
+      <option value="Baby Sitter" <?= ctx.resource.designation === 'Baby Sitter' ? 'selected' : '' ?>>Baby Sitter</option>
+      <option value="BSN" <?= ctx.resource.designation === 'BSN' ? 'selected' : '' ?>>BSN</option>
+      <option value="Doctor" <?= ctx.resource.designation === 'Doctor' ? 'selected' : '' ?>>Doctor</option>
+    </select>
+  </div>
+
+  <div class="col-md-6">
+    <label class="form-label">Hire Date</label>
+    <input type="date" name="hireDate" class="form-control" value="<?= ctx.resource.hireDate || '' ?>">
+  </div>
+
+  <div class="col-md-6">
+    <label class="form-label">Contact 1 *</label>
+    <input type="text" name="contact1" class="form-control" placeholder="0300-1234567" value="<?= ctx.resource.contact1 || '' ?>" required>
+  </div>
+
+  <div class="col-md-6">
+    <label class="form-label">Contact 2</label>
+    <input type="text" name="contact2" class="form-control" value="<?= ctx.resource.contact2 || '' ?>">
+  </div>
+
+  <div class="col-md-12">
+    <label class="form-label">District</label>
+    <input type="text" name="district" class="form-control" value="<?= ctx.resource.district || '' ?>">
+  </div>
+
+  <div class="col-12">
+    <label class="form-label">Notes</label>
+    <textarea name="notes" class="form-control" rows="3"><?= ctx.resource.notes || '' ?></textarea>
+  </div>
+
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Save Staff</button>
+    <a href="/admin/staff/list" class="btn btn-secondary">Cancel</a>
+  </div>
+</form>

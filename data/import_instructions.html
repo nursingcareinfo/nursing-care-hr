@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NursingCare.pk Staff Import</title>
+    <style>
+        body { font-family: Arial; max-width: 800px; margin: 50px auto; padding: 20px; }
+        .step { background: #f5f5f5; padding: 15px; margin: 10px 0; border-radius: 8px; }
+        .highlight { background: #e3f2fd; padding: 10px; border-left: 4px solid #2196F3; }
+        code { background: #333; color: #fff; padding: 2px 6px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <h1>📋 Import Staff to Google Sheets</h1>
+    
+    <div class="step">
+        <h3>Step 1: Get the CSV File</h3>
+        <p>File location: <code>/home/archbtw/dev/HR_manager_home_nursing_care/data/staff_export.csv</code></p>
+        <p>Contains: <strong>286 staff records</strong> (NC-KHI-001 to NC-KHI-286)</p>
+    </div>
+    
+    <div class="step">
+        <h3>Step 2: Import to Google Sheets</h3>
+        <ol>
+            <li>Open: <a href="https://docs.google.com/spreadsheets" target="_blank">Google Sheets</a></li>
+            <li>Open your <strong>Master Staff</strong> spreadsheet</li>
+            <li>Go to <strong>File → Import → Upload</strong></li>
+            <li>Upload the CSV file</li>
+            <li>Select <strong>"Replace spreadsheet"</strong></li>
+        </ol>
+    </div>
+    
+    <div class="highlight">
+        <h3>✅ Quick Alternative</h3>
+        <p>If you just need the data in Sheets quickly:</p>
+        <ol>
+            <li>Copy the CSV content</li>
+            <li>Paste directly into Sheet (first cell)</li>
+            <li>Data → Split text to columns</li>
+        </ol>
+    </div>
+    
+    <div class="step">
+        <h3>📊 Staff Summary</h3>
+        <ul>
+            <li>NC-KHI-001 → Atif Ali (CEO)</li>
+            <li>NC-KHI-002 → Theo (HR Manager)</li>
+            <li>NC-KHI-003 → Karim Bhai (Manager)</li>
+            <li>NC-KHI-004 → Mr. Naveed (Office Boy)</li>
+            <li>NC-KHI-005 to NC-KHI-286 → Other Staff (282 employees)</li>
+        </ul>
+    </div>
+</body>
+</html>

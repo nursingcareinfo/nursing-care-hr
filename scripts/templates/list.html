@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2>Staff List</h2>
+  <a href="<?= ctx.addLink ?>" class="btn btn-primary">+ Add New Staff</a>
+</div>
+
+<input type="text" id="filterInput" class="form-control mb-3" placeholder="Search staff...">
+
+<table class="table table-striped table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Designation</th>
+      <th>Contact</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody id="staffTable">
+    <? for (let res of ctx.resources) { ?>
+    <tr>
+      <td><?= res.assignedId ?></td>
+      <td><?= res.name ?></td>
+      <td><?= res.designation || '-' ?></td>
+      <td><?= res.contact1 || '-' ?></td>
+      <td>
+        <span class="badge bg-<?= res.status === 'active' ? 'success' : res.status === 'on-leave' ? 'warning' : 'secondary' ?>">
+          <?= res.status ?>
+        </span>
+      </td>
+      <td>
+        <a href="<?= res.showLink ?>" class="btn btn-sm btn-info">View</a>
+      </td>
+    </tr>
+    <? } ?>
+  </tbody>
+</table>
+
+<? if (ctx.resources.length === 0) { ?>
+<div class="alert alert-info">No staff members found. <a href="<?= ctx.addLink ?>">Add the first staff</a></div>
+<? } ?>
+
+<script>
+document.getElementById('filterInput').addEventListener('input', function() {
+  const filter = this.value.toLowerCase();
+  const rows = document.querySelectorAll('#staffTable tr');
+  rows.forEach(row => {
+    const text = row.textContent.toLowerCase();
+    row.style.display = text.includes(filter) ? '' : 'none';
+  });
+});
+</script>

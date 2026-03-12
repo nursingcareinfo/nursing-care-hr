@@ -1,0 +1,114 @@
+{
+  "name": "WhatsApp HR Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "whatsapp-hr",
+        "responseMode": "onComplete"
+      },
+      "id": "webhook",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "code": "const message = $input.first().json;\nconst msgText = (message.message || '').toUpperCase().trim();\nconst from = message.from;\n\nlet response = '';\nlet command = '';\n\nswitch(msgText) {\n  case 'HI':\n  case 'HELLO':\n  case 'START':\n    response = 'Welcome to NursingCare.pk! 👋\\n\\nSend:\\n- IN : Check in\\n- OUT : Check out\\n- LEAVE : Request leave\\n- SHIFT : View shift info\\n- HELP : Show this menu';\n    command = 'HELP';\n    break;\n  case 'IN':\n    response = '✅ Check-in recorded!\\nHave a great shift!';\n    command = 'IN';\n    break;\n  case 'OUT':\n    response = '✅ Check-out recorded!\\nThank you for your work today!';\n    command = 'OUT';\n    break;\n  case 'LEAVE':\n    response = '📝 Leave Request\\n\\nPlease send:\\nLEAVE [type] [dates] [reason]\\n\\nExample: LEAVE sick 15-03 fever';\n    command = 'LEAVE';\n    break;\n  case 'SHIFT':\n    response = '📅 Shift Info\\n\\nDay Shift: 08:00 - 20:00\\nNight Shift: 20:00 - 08:00';\n    command = 'SHIFT';\n    break;\n  case 'HELP':\n    response = '📋 Commands:\\n\\n- IN : Check in to shift\\n- OUT : Check out from shift\\n- LEAVE : Request leave\\n- SHIFT : View shift times\\n- HELP : Show this menu';\n    command = 'HELP';\n    break;\n  default:\n    response = '❓ Unknown command.\\n\\nSend HELP for menu.';\n    command = 'UNKNOWN';\n}\n\nreturn [{\n  from: from,\n  message: response,\n  command: command,\n  originalMessage: msgText\n}];"
+      },
+      "id": "process",
+      "name": "Process Command",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 3,
+      "position": [500, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:8080/message/sendText/NursingCare",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "evolution_nursingcare_2026"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "number",
+              "value": "{{ $json.from }}"
+            },
+            {
+              "name": "text",
+              "value": "{{ $json.message }}"
+            }
+          ]
+        }
+      },
+      "id": "send",
+      "name": "Send Response",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [750, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\"status\": \"ok\"}"
+      },
+      "id": "respond",
+      "name": "Respond",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1000, 300]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Process Command",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process Command": {
+      "main": [
+        [
+          {
+            "node": "Send Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Response": {
+      "main": [
+        [
+          {
+            "node": "Respond",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-03-12T21:20:00.000Z",
+  "versionId": "1"
+}
