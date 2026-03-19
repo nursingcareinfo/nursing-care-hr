@@ -68,6 +68,58 @@ function saveSupabaseExportedIds(ids) {
     }
 }
 
+/**
+ * Convert various date formats to PostgreSQL YYYY-MM-DD format
+ * Handles: DD.MM.YYYY, DD-MM-YYYY, DD/MM/YYYY
+ */
+function normalizeDate(dateStr) {
+    if (!dateStr || dateStr === 'No record' || dateStr === '') return null;
+    
+    let day, month, year;
+    
+    // Handle DD.MM.YYYY format
+    if (dateStr.includes('.')) {
+        const parts = dateStr.split('.');
+        if (parts.length === 3) {
+            day = parts[0];
+            month = parts[1];
+            year = parts[2];
+        }
+    }
+    // Handle DD-MM-YYYY format
+    else if (dateStr.includes('-')) {
+        const parts = dateStr.split('-');
+        if (parts.length === 3) {
+            day = parts[0];
+            month = parts[1];
+            year = parts[2];
+        }
+    }
+    // Handle DD/MM/YYYY format
+    else if (dateStr.includes('/')) {
+        const parts = dateStr.split('/');
+        if (parts.length === 3) {
+            day = parts[0];
+            month = parts[1];
+            year = parts[2];
+        }
+    }
+    
+    // Validate and pad
+    if (day && month && year) {
+        day = day.padStart(2, '0');
+        month = month.padStart(2, '0');
+        // Assume 4-digit year
+        if (year.length === 2) {
+            year = (parseInt(year) > 50) ? '19' + year : '20' + year;
+        }
+        return `${year}-${month}-${day}`;
+    }
+    
+    // If parsing fails, return null (let DB handle or skip)
+    return null;
+}
+
 function parseStaffReport() {
     const content = fs.readFileSync(REPORT_PATH, 'utf8');
     const lines = content.split('\n').filter(line =>
@@ -79,22 +131,23 @@ function parseStaffReport() {
 
     return lines.map(line => {
         const cols = line.split('|').map(c => c.trim()).filter(Boolean);
-        return {
+        const record = {
             assigned_id: cols[0],
             name: cols[1],
             father_husband_name: cols[2] === 'No record' ? null : cols[2],
-            date_of_birth: cols[3] === 'No record' || cols[3] === '' ? null : cols[3],
+            date_of_birth: normalizeDate(cols[3]),
             gender: cols[4] === 'No record' ? null : cols[4],
             cnic: cols[5] === 'No record' ? null : cols[5],
             designation: cols[6] === 'No record' ? null : cols[6],
             contact_1: cols[7] === 'No record' ? null : cols[7],
             district: cols[8] === 'No record' ? null : cols[8]
         };
+
+        return record;
     });
 }
 
 async function checkStaffTable() {
-    // Check if the staff table exists and is accessible
     try {
         const { data, error } = await supabase
             .from('staff')
@@ -116,7 +169,6 @@ async function exportData() {
     try {
         console.log('Connected to Supabase:', SUPABASE_URL);
         
-        // Check if staff table is accessible
         await checkStaffTable();
 
         const exportedIds = loadSupabaseExportedIds();
@@ -145,7 +197,6 @@ async function exportData() {
 
             console.log(`Sending batch ${batchNum}/${totalBatches} (${batch.length} records)...`);
 
-            // Use upsert to handle duplicates gracefully
             const { data, error } = await supabase
                 .from('staff')
                 .upsert(batch, { onConflict: 'assigned_id', ignoreDuplicates: false })
