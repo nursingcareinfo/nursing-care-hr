@@ -1,0 +1,1552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Daily Expense Tracker - Printable Forms</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .page {
+            background: white;
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto 20px;
+            padding: 15mm;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            page-break-after: always;
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #1a73e8;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .header h1 {
+            color: #1a73e8;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .header h2 {
+            color: #5f6368;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        .header .info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            font-size: 13px;
+            color: #5f6368;
+        }
+        
+        .section-title {
+            background: linear-gradient(135deg, #1a73e8 0%, #4285f4 100%);
+            color: white;
+            padding: 10px 15px;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 20px 0 10px;
+            border-radius: 4px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+            font-size: 11px;
+        }
+        
+        th {
+            background: #1a73e8;
+            color: white;
+            padding: 8px 6px;
+            text-align: left;
+            font-weight: 600;
+            border: 1px solid #0d47a1;
+        }
+        
+        td {
+            border: 1px solid #dadce0;
+            padding: 8px 6px;
+            height: 35px;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .blank-row {
+            height: 30px;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .form-group {
+            flex: 1;
+        }
+        
+        .form-group label {
+            display: block;
+            font-size: 11px;
+            font-weight: 600;
+            color: #5f6368;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+        
+        .form-group .field {
+            border: 1px solid #dadce0;
+            padding: 8px 12px;
+            font-size: 13px;
+            border-radius: 4px;
+            min-height: 35px;
+            background: #fafafa;
+        }
+        
+        .totals-box {
+            border: 2px solid #1a73e8;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        
+        .totals-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 15px;
+            border-bottom: 1px dashed #dadce0;
+            font-size: 13px;
+        }
+        
+        .totals-row:last-child {
+            border-bottom: none;
+            font-weight: 700;
+            font-size: 15px;
+            color: #1a73e8;
+            background: #e8f0fe;
+            margin: 0 -15px -15px;
+            padding: 12px 15px;
+            border-radius: 0 0 6px 6px;
+        }
+        
+        .signature-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            gap: 30px;
+        }
+        
+        .signature-box {
+            flex: 1;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .signature-box .label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #5f6368;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+        
+        .signature-box .line {
+            border-top: 2px solid #1a73e8;
+            padding-top: 8px;
+            font-size: 12px;
+            color: #5f6368;
+        }
+        
+        .checkbox {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #1a73e8;
+            border-radius: 3px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        
+        .category-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin: 10px 0;
+        }
+        
+        .category-item {
+            display: flex;
+            align-items: center;
+            font-size: 11px;
+            padding: 5px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+        
+        .instructions {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin: 15px 0;
+            font-size: 12px;
+            color: #856404;
+        }
+        
+        .instructions strong {
+            color: #664d03;
+        }
+        
+        .watermark {
+            position: fixed;
+            bottom: 10mm;
+            right: 10mm;
+            font-size: 10px;
+            color: #9aa0a6;
+        }
+        
+        .page-number {
+            position: fixed;
+            bottom: 10mm;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 10px;
+            color: #9aa0a6;
+        }
+        
+        .no-print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #1a73e8 0%, #4285f4 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(26, 115, 232, 0.3);
+            z-index: 1000;
+        }
+        
+        .no-print-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(26, 115, 232, 0.4);
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .page {
+                box-shadow: none;
+                margin: 0;
+                page-break-after: always;
+            }
+            
+            .no-print-btn {
+                display: none;
+            }
+            
+            .watermark, .page-number {
+                position: absolute;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="no-print-btn" onclick="window.print()">🖨️ Print All Forms</button>
+
+    <!-- PAGE 1: Daily Expense Log -->
+    <div class="page">
+        <div class="header">
+            <h1>📋 DAILY EXPENSE LOG</h1>
+            <h2>NursingCare.pk - HR Department</h2>
+            <div class="info">
+                <span><strong>Month:</strong> _______________</span>
+                <span><strong>Year:</strong> _______________</span>
+                <span><strong>Prepared By:</strong> _______________</span>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <strong>📝 Instructions:</strong> Record all daily expenses in this log. Attach receipts and get approval from HR Manager before submission to Finance.
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 8%;">Date</th>
+                    <th style="width: 12%;">Expense ID</th>
+                    <th style="width: 15%;">Category</th>
+                    <th style="width: 25%;">Description</th>
+                    <th style="width: 15%;">Vendor/Payee</th>
+                    <th style="width: 10%;">Amount (Rs.)</th>
+                    <th style="width: 10%;">Status</th>
+                    <th style="width: 5%;">✓</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td>EXP-___-001</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>☐ Pending<br>☐ Approved</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>EXP-___-002</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>☐ Pending<br>☐ Approved</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>EXP-___-003</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>☐ Pending<br>☐ Approved</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>EXP-___-004</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>☐ Pending<br>☐ Approved</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>EXP-___-005</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>☐ Pending<br>☐ Approved</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>EXP-___-006</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>☐ Pending<br>☐ Approved</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>EXP-___-007</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>☐ Pending<br>☐ Approved</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>EXP-___-008</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>☐ Pending<br>☐ Approved</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>EXP-___-009</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>☐ Pending<br>☐ Approved</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>EXP-___-010</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>☐ Pending<br>☐ Approved</td>
+                    <td></td>
+                </tr>
+                <tr class="blank-row">
+                    <td></td>
+                    <td>EXP-___-011</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>☐ Pending<br>☐ Approved</td>
+                    <td></td>
+                </tr>
+                <tr class="blank-row">
+                    <td></td>
+                    <td>EXP-___-012</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>☐ Pending<br>☐ Approved</td>
+                    <td></td>
+                </tr>
+                <tr class="blank-row">
+                    <td></td>
+                    <td>EXP-___-013</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>☐ Pending<br>☐ Approved</td>
+                    <td></td>
+                </tr>
+                <tr class="blank-row">
+                    <td></td>
+                    <td>EXP-___-014</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>☐ Pending<br>☐ Approved</td>
+                    <td></td>
+                </tr>
+                <tr class="blank-row">
+                    <td></td>
+                    <td>EXP-___-015</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>☐ Pending<br>☐ Approved</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="totals-box">
+            <div class="totals-row">
+                <span>Total Expenses This Period:</span>
+                <span>Rs. _______________</span>
+            </div>
+            <div class="totals-row">
+                <span>Less: Previous Balance:</span>
+                <span>Rs. _______________</span>
+            </div>
+            <div class="totals-row">
+                <span>NET TOTAL:</span>
+                <span>Rs. _______________</span>
+            </div>
+        </div>
+        
+        <div class="signature-section">
+            <div class="signature-box">
+                <div class="label">Prepared By</div>
+                <div class="line">Name & Signature</div>
+                <div class="line">Date: __/__/____</div>
+            </div>
+            <div class="signature-box">
+                <div class="label">Verified By (HR Admin)</div>
+                <div class="line">Name & Signature</div>
+                <div class="line">Date: __/__/____</div>
+            </div>
+            <div class="signature-box">
+                <div class="label">Approved By (HR Manager)</div>
+                <div class="line">Name & Signature</div>
+                <div class="line">Date: __/__/____</div>
+            </div>
+        </div>
+        
+        <div class="watermark">NursingCare.pk - HR Department</div>
+        <div class="page-number">Page 1 of 6</div>
+    </div>
+
+    <!-- PAGE 2: Petty Cash Voucher -->
+    <div class="page">
+        <div class="header">
+            <h1>💰 PETTY CASH VOUCHER</h1>
+            <h2>NursingCare.pk - HR Department</h2>
+            <div class="info">
+                <span><strong>Voucher Series:</strong> PC-2026-___</span>
+                <span><strong>Fund Custodian:</strong> _______________</span>
+                <span><strong>Imprest Limit:</strong> Rs. 10,000</span>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <strong>📝 Instructions:</strong> Use this form for small cash expenses under Rs. 500. Attach original receipt. Get approval before disbursement.
+        </div>
+        
+        <div class="section-title">VOUCHER DETAILS</div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label>Voucher Number</label>
+                <div class="field">PC-2026-_______</div>
+            </div>
+            <div class="form-group">
+                <label>Date</label>
+                <div class="field">__ / __ / 20__</div>
+            </div>
+            <div class="form-group">
+                <label>Amount (Rs.)</label>
+                <div class="field">_______________</div>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label>Paid To (Name)</label>
+                <div class="field">_________________________________</div>
+            </div>
+            <div class="form-group">
+                <label>Employee ID (if applicable)</label>
+                <div class="field">NC-_____</div>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group" style="flex: 2;">
+                <label>Purpose / Particulars</label>
+                <div class="field" style="min-height: 50px;">_________________________________</div>
+            </div>
+        </div>
+        
+        <div class="section-title">EXPENSE CATEGORY</div>
+        
+        <div class="category-list">
+            <div class="category-item"><span class="checkbox"></span> Office Supplies</div>
+            <div class="category-item"><span class="checkbox"></span> Stationery</div>
+            <div class="category-item"><span class="checkbox"></span> Printing/Copying</div>
+            <div class="category-item"><span class="checkbox"></span> Postage/Courier</div>
+            <div class="category-item"><span class="checkbox"></span> Tea/Refreshments</div>
+            <div class="category-item"><span class="checkbox"></span> Parking/Tolls</div>
+            <div class="category-item"><span class="checkbox"></span> Emergency Purchase</div>
+            <div class="category-item"><span class="checkbox"></span> Other: _________</div>
+        </div>
+        
+        <div class="section-title">RECEIPT INFORMATION</div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label>Receipt Number</label>
+                <div class="field">_______________</div>
+            </div>
+            <div class="form-group">
+                <label>Vendor/Shop Name</label>
+                <div class="field">_______________</div>
+            </div>
+            <div class="form-group">
+                <label>Receipt Attached?</label>
+                <div class="field" style="display: flex; gap: 15px; align-items: center;">
+                    <span><span class="checkbox"></span> Yes</span>
+                    <span><span class="checkbox"></span> No (Reason: ___________)</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section-title">APPROVALS</div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 25%;">Requested By</th>
+                    <th style="width: 25%;">Approved By (HR Admin)</th>
+                    <th style="width: 25%;">Verified By (Finance)</th>
+                    <th style="width: 25%;">Cash Disbursed By</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="height: 80px; vertical-align: bottom; text-align: center;">
+                        ______________________<br>
+                        <span style="font-size: 10px; color: #5f6368;">Signature</span>
+                    </td>
+                    <td style="height: 80px; vertical-align: bottom; text-align: center;">
+                        ______________________<br>
+                        <span style="font-size: 10px; color: #5f6368;">Signature</span>
+                    </td>
+                    <td style="height: 80px; vertical-align: bottom; text-align: center;">
+                        ______________________<br>
+                        <span style="font-size: 10px; color: #5f6368;">Signature</span>
+                    </td>
+                    <td style="height: 80px; vertical-align: bottom; text-align: center;">
+                        ______________________<br>
+                        <span style="font-size: 10px; color: #5f6368;">Signature</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center; font-size: 10px;">Date: __/__/____</td>
+                    <td style="text-align: center; font-size: 10px;">Date: __/__/____</td>
+                    <td style="text-align: center; font-size: 10px;">Date: __/__/____</td>
+                    <td style="text-align: center; font-size: 10px;">Date: __/__/____</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="section-title">PETTY CASH REGISTER (For Custodian Use)</div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 10%;">Date</th>
+                    <th style="width: 12%;">Voucher #</th>
+                    <th style="width: 28%;">Particulars</th>
+                    <th style="width: 15%;">Cash Out</th>
+                    <th style="width: 15%;">Cash In</th>
+                    <th style="width: 20%;">Running Balance</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>Opening Balance</td>
+                    <td>-</td>
+                    <td>_______________</td>
+                    <td>Rs. 10,000</td>
+                </tr>
+                <tr class="blank-row">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="blank-row">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="blank-row">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="blank-row">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="watermark">NursingCare.pk - HR Department</div>
+        <div class="page-number">Page 2 of 6</div>
+    </div>
+
+    <!-- PAGE 3: Employee Reimbursement Claim -->
+    <div class="page">
+        <div class="header">
+            <h1>👥 EMPLOYEE EXPENSE REIMBURSEMENT CLAIM</h1>
+            <h2>NursingCare.pk - HR Department</h2>
+            <div class="info">
+                <span><strong>Claim Series:</strong> REIMB-2026-___</span>
+                <span><strong>Department:</strong> HR</span>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <strong>📝 Instructions:</strong> Complete this form for expense reimbursement claims. Attach all original receipts. Submit within 7 days of expense incurrence.
+        </div>
+        
+        <div class="section-title">EMPLOYEE INFORMATION</div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label>Employee Name</label>
+                <div class="field">_________________________________</div>
+            </div>
+            <div class="form-group">
+                <label>Employee ID</label>
+                <div class="field">NC-_______________</div>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label>Designation</label>
+                <div class="field">_________________________________</div>
+            </div>
+            <div class="form-group">
+                <label>Department</label>
+                <div class="field">☐ HR ☐ Operations ☐ Admin ☐ Other: _______</div>
+            </div>
+            <div class="form-group">
+                <label>Contact Number</label>
+                <div class="field">03_______________</div>
+            </div>
+        </div>
+        
+        <div class="section-title">CLAIM DETAILS</div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 12%;">Date</th>
+                    <th style="width: 15%;">Category</th>
+                    <th style="width: 35%;">Description & Business Purpose</th>
+                    <th style="width: 13%;">Receipt #</th>
+                    <th style="width: 12%;">Amount (Rs.)</th>
+                    <th style="width: 8%;">✓</th>
+                    <th style="width: 5%;">✓</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr style="background: #e8f0fe; font-weight: 600;">
+                    <td colspan="4" style="text-align: right;">TOTAL CLAIM AMOUNT:</td>
+                    <td colspan="3">Rs. _______________</td>
+                </tr>
+            </tfoot>
+        </table>
+        
+        <div class="section-title">EXPENSE CATEGORIES (Check all that apply)</div>
+        
+        <div class="category-list">
+            <div class="category-item"><span class="checkbox"></span> Travel (Local)</div>
+            <div class="category-item"><span class="checkbox"></span> Travel (Outstation)</div>
+            <div class="category-item"><span class="checkbox"></span> Client Meeting</div>
+            <div class="category-item"><span class="checkbox"></span> Training/Workshop</div>
+            <div class="category-item"><span class="checkbox"></span> Office Supplies</div>
+            <div class="category-item"><span class="checkbox"></span> Phone/Internet</div>
+            <div class="category-item"><span class="checkbox"></span> Client Entertainment</div>
+            <div class="category-item"><span class="checkbox"></span> Emergency Purchase</div>
+        </div>
+        
+        <div class="section-title">PAYMENT INFORMATION</div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label>Bank Name</label>
+                <div class="field">_________________________________</div>
+            </div>
+            <div class="form-group">
+                <label>Account Title</label>
+                <div class="field">_________________________________</div>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label>Account Number / IBAN</label>
+                <div class="field">_________________________________</div>
+            </div>
+            <div class="form-group">
+                <label>Payment Method Requested</label>
+                <div class="field" style="display: flex; gap: 15px; align-items: center;">
+                    <span><span class="checkbox"></span> Bank Transfer</span>
+                    <span><span class="checkbox"></span> Cash</span>
+                    <span><span class="checkbox"></span> Cheque</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section-title">ATTACHMENTS CHECKLIST</div>
+        
+        <table>
+            <tbody>
+                <tr>
+                    <td style="width: 33%;"><span class="checkbox"></span> Original Receipts (___ pieces)</td>
+                    <td style="width: 33%;"><span class="checkbox"></span> Approval Email/Note</td>
+                    <td style="width: 33%;"><span class="checkbox"></span> Supporting Documents</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="signature-section">
+            <div class="signature-box">
+                <div class="label">Claimant</div>
+                <div class="line">Name & Signature</div>
+                <div class="line">Date: __/__/____</div>
+            </div>
+            <div class="signature-box">
+                <div class="label">Department Head</div>
+                <div class="line">Name & Signature</div>
+                <div class="line">Date: __/__/____</div>
+            </div>
+            <div class="signature-box">
+                <div class="label">HR Manager</div>
+                <div class="line">Name & Signature</div>
+                <div class="line">Date: __/__/____</div>
+            </div>
+            <div class="signature-box">
+                <div class="label">Finance Approval</div>
+                <div class="line">Name & Signature</div>
+                <div class="line">Date: __/__/____</div>
+            </div>
+        </div>
+        
+        <div class="watermark">NursingCare.pk - HR Department</div>
+        <div class="page-number">Page 3 of 6</div>
+    </div>
+
+    <!-- PAGE 4: Monthly Budget Tracker -->
+    <div class="page">
+        <div class="header">
+            <h1>📊 MONTHLY BUDGET TRACKER</h1>
+            <h2>NursingCare.pk - HR Department</h2>
+            <div class="info">
+                <span><strong>Month:</strong> _______________</span>
+                <span><strong>Year:</strong> _______________</span>
+                <span><strong>Prepared By:</strong> _______________</span>
+            </div>
+        </div>
+        
+        <div class="section-title">BUDGET ALLOCATION & UTILIZATION</div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 25%;">Expense Category</th>
+                    <th style="width: 15%;">Budget (Rs.)</th>
+                    <th style="width: 15%;">Spent (Rs.)</th>
+                    <th style="width: 15%;">Remaining (Rs.)</th>
+                    <th style="width: 15%;">% Used</th>
+                    <th style="width: 15%;">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Office Supplies</strong></td>
+                    <td>5,000</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>☐ 🟢 ☐ 🟡 ☐ 🔴</td>
+                </tr>
+                <tr>
+                    <td><strong>Employee Expenses</strong></td>
+                    <td>15,000</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>☐ 🟢 ☐ 🟡 ☐ 🔴</td>
+                </tr>
+                <tr>
+                    <td><strong>Utilities</strong></td>
+                    <td>10,000</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>☐ 🟢 ☐ 🟡 ☐ 🔴</td>
+                </tr>
+                <tr>
+                    <td><strong>Travel & Transport</strong></td>
+                    <td>8,000</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>☐ 🟢 ☐ 🟡 ☐ 🔴</td>
+                </tr>
+                <tr>
+                    <td><strong>Client Relations</strong></td>
+                    <td>5,000</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>☐ 🟢 ☐ 🟡 ☐ 🔴</td>
+                </tr>
+                <tr>
+                    <td><strong>Professional Services</strong></td>
+                    <td>5,000</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>☐ 🟢 ☐ 🟡 ☐ 🔴</td>
+                </tr>
+                <tr>
+                    <td><strong>Miscellaneous</strong></td>
+                    <td>2,000</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>☐ 🟢 ☐ 🟡 ☐ 🔴</td>
+                </tr>
+                <tr style="background: #e8f0fe; font-weight: 700;">
+                    <td>TOTAL</td>
+                    <td>50,000</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="section-title">WEEKLY EXPENSE SUMMARY</div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 20%;">Week</th>
+                    <th style="width: 16%;">Office Supplies</th>
+                    <th style="width: 16%;">Employee Exp</th>
+                    <th style="width: 16%;">Utilities</th>
+                    <th style="width: 16%;">Travel</th>
+                    <th style="width: 16%;">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Week 1</strong><br><span style="font-size: 10px; color: #5f6368;">(1st - 7th)</span></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><strong>Week 2</strong><br><span style="font-size: 10px; color: #5f6368;">(8th - 14th)</span></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><strong>Week 3</strong><br><span style="font-size: 10px; color: #5f6368;">(15th - 21st)</span></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><strong>Week 4</strong><br><span style="font-size: 10px; color: #5f6368;">(22nd - End)</span></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr style="background: #e8f0fe; font-weight: 600;">
+                    <td>Month Total</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="section-title">BUDGET VARIANCE ANALYSIS</div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label>Total Budget</label>
+                <div class="field">Rs. 50,000</div>
+            </div>
+            <div class="form-group">
+                <label>Total Spent</label>
+                <div class="field">Rs. _______________</div>
+            </div>
+            <div class="form-group">
+                <label>Variance (+/-)</label>
+                <div class="field">Rs. _______________</div>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group" style="flex: 2;">
+                <label>Comments / Remarks</label>
+                <div class="field" style="min-height: 60px;">_________________________________</div>
+            </div>
+        </div>
+        
+        <div class="signature-section">
+            <div class="signature-box">
+                <div class="label">Prepared By (HR Admin)</div>
+                <div class="line">Name & Signature</div>
+                <div class="line">Date: __/__/____</div>
+            </div>
+            <div class="signature-box">
+                <div class="label">Reviewed By (HR Manager)</div>
+                <div class="line">Name & Signature</div>
+                <div class="line">Date: __/__/____</div>
+            </div>
+            <div class="signature-box">
+                <div class="label">Approved By (Finance)</div>
+                <div class="line">Name & Signature</div>
+                <div class="line">Date: __/__/____</div>
+            </div>
+        </div>
+        
+        <div class="watermark">NursingCare.pk - HR Department</div>
+        <div class="page-number">Page 4 of 6</div>
+    </div>
+
+    <!-- PAGE 5: Vendor Master List -->
+    <div class="page">
+        <div class="header">
+            <h1>🏢 VENDOR MASTER LIST</h1>
+            <h2>NursingCare.pk - HR Department - Approved Suppliers</h2>
+            <div class="info">
+                <span><strong>Last Updated:</strong> _______________</span>
+                <span><strong>Verified By:</strong> _______________</span>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <strong>📝 Instructions:</strong> Maintain this list of approved vendors for HR department purchases. Only use vendors from this list for regular purchases.
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 10%;">Vendor ID</th>
+                    <th style="width: 20%;">Vendor Name</th>
+                    <th style="width: 15%;">Category</th>
+                    <th style="width: 15%;">Contact Person</th>
+                    <th style="width: 15%;">Phone Number</th>
+                    <th style="width: 15%;">Payment Terms</th>
+                    <th style="width: 10%;">✓</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>V-001</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>☐ Cash ☐ Net-15 ☐ Net-30</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>V-002</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>☐ Cash ☐ Net-15 ☐ Net-30</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>V-003</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>☐ Cash ☐ Net-15 ☐ Net-30</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>V-004</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>☐ Cash ☐ Net-15 ☐ Net-30</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>V-005</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>☐ Cash ☐ Net-15 ☐ Net-30</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>V-006</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>☐ Cash ☐ Net-15 ☐ Net-30</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>V-007</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>☐ Cash ☐ Net-15 ☐ Net-30</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>V-008</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>☐ Cash ☐ Net-15 ☐ Net-30</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>V-009</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>☐ Cash ☐ Net-15 ☐ Net-30</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>V-010</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>☐ Cash ☐ Net-15 ☐ Net-30</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="section-title">VENDOR CATEGORY REFERENCE</div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 20%;">Category Code</th>
+                    <th style="width: 40%;">Category Name</th>
+                    <th style="width: 40%;">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>OS</strong></td>
+                    <td>Office Supplies</td>
+                    <td>Stationery, printing materials, office equipment</td>
+                </tr>
+                <tr>
+                    <td><strong>UT</strong></td>
+                    <td>Utilities</td>
+                    <td>Electricity, internet, phone, water, maintenance</td>
+                </tr>
+                <tr>
+                    <td><strong>TR</strong></td>
+                    <td>Travel & Transport</td>
+                    <td>Transportation, fuel, vehicle maintenance</td>
+                </tr>
+                <tr>
+                    <td><strong>EE</strong></td>
+                    <td>Employee Expenses</td>
+                    <td>Training, recruitment, onboarding, team events</td>
+                </tr>
+                <tr>
+                    <td><strong>CR</strong></td>
+                    <td>Client Relations</td>
+                    <td>Client meetings, entertainment, gifts</td>
+                </tr>
+                <tr>
+                    <td><strong>PS</strong></td>
+                    <td>Professional Services</td>
+                    <td>Legal, accounting, consulting services</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="section-title">NEW VENDOR REGISTRATION FORM</div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label>Vendor/Company Name</label>
+                <div class="field">_________________________________</div>
+            </div>
+            <div class="form-group">
+                <label>Category</label>
+                <div class="field">_________________________________</div>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label>Contact Person Name</label>
+                <div class="field">_________________________________</div>
+            </div>
+            <div class="form-group">
+                <label>Designation</label>
+                <div class="field">_________________________________</div>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label>Phone Number</label>
+                <div class="field">03_______________</div>
+            </div>
+            <div class="form-group">
+                <label>Email Address</label>
+                <div class="field">_________________________________</div>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group" style="flex: 2;">
+                <label>Business Address</label>
+                <div class="field" style="min-height: 40px;">_________________________________</div>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label>Payment Terms</label>
+                <div class="field" style="display: flex; gap: 15px; align-items: center;">
+                    <span><span class="checkbox"></span> Cash</span>
+                    <span><span class="checkbox"></span> Net-15 Days</span>
+                    <span><span class="checkbox"></span> Net-30 Days</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Preferred By</label>
+                <div class="field">_________________________________</div>
+            </div>
+        </div>
+        
+        <div class="signature-section" style="margin-top: 20px;">
+            <div class="signature-box">
+                <div class="label">Requested By</div>
+                <div class="line">Name & Signature</div>
+                <div class="line">Date: __/__/____</div>
+            </div>
+            <div class="signature-box">
+                <div class="label">Approved By (HR Manager)</div>
+                <div class="line">Name & Signature</div>
+                <div class="line">Date: __/__/____</div>
+            </div>
+        </div>
+        
+        <div class="watermark">NursingCare.pk - HR Department</div>
+        <div class="page-number">Page 5 of 6</div>
+    </div>
+
+    <!-- PAGE 6: Monthly Summary Report -->
+    <div class="page">
+        <div class="header">
+            <h1>📈 MONTHLY EXPENSE SUMMARY REPORT</h1>
+            <h2>NursingCare.pk - HR Department</h2>
+            <div class="info">
+                <span><strong>Report Period:</strong> _______________</span>
+                <span><strong>Submitted To:</strong> Finance Department</span>
+            </div>
+        </div>
+        
+        <div class="section-title">EXECUTIVE SUMMARY</div>
+        
+        <table>
+            <tbody>
+                <tr>
+                    <td style="width: 25%; font-weight: 600;">Total Budget Allocated:</td>
+                    <td style="width: 25%;">Rs. _______________</td>
+                    <td style="width: 25%; font-weight: 600;">Total Expenses Incurred:</td>
+                    <td style="width: 25%;">Rs. _______________</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: 600;">Budget Utilization (%):</td>
+                    <td>_______________%</td>
+                    <td style="font-weight: 600;">Variance (+/-):</td>
+                    <td>Rs. _______________</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: 600;">Number of Transactions:</td>
+                    <td>_______________</td>
+                    <td style="font-weight: 600;">Pending Reimbursements:</td>
+                    <td>Rs. _______________</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="section-title">CATEGORY-WISE BREAKDOWN</div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 20%;">Category</th>
+                    <th style="width: 16%;">Budget (Rs.)</th>
+                    <th style="width: 16%;">Actual (Rs.)</th>
+                    <th style="width: 16%;">Variance (Rs.)</th>
+                    <th style="width: 16%;">Variance (%)</th>
+                    <th style="width: 16%;">Remarks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Office Supplies</strong></td>
+                    <td>5,000</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><strong>Employee Expenses</strong></td>
+                    <td>15,000</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><strong>Utilities</strong></td>
+                    <td>10,000</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><strong>Travel & Transport</strong></td>
+                    <td>8,000</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><strong>Client Relations</strong></td>
+                    <td>5,000</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><strong>Professional Services</strong></td>
+                    <td>5,000</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><strong>Miscellaneous</strong></td>
+                    <td>2,000</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr style="background: #e8f0fe; font-weight: 700;">
+                    <td>TOTAL</td>
+                    <td>50,000</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="section-title">TOP 5 EXPENSES THIS MONTH</div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 10%;">#</th>
+                    <th style="width: 20%;">Date</th>
+                    <th style="width: 30%;">Description</th>
+                    <th style="width: 20%;">Category</th>
+                    <th style="width: 20%;">Amount (Rs.)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="section-title">COMMENTS & RECOMMENDATIONS</div>
+        
+        <div style="border: 1px solid #dadce0; border-radius: 8px; min-height: 120px; padding: 15px; margin-bottom: 20px;">
+            <p style="color: #5f6368; font-size: 13px; line-height: 1.8;">________________________________________________________________</p>
+            <p style="color: #5f6368; font-size: 13px; line-height: 1.8;">________________________________________________________________</p>
+            <p style="color: #5f6368; font-size: 13px; line-height: 1.8;">________________________________________________________________</p>
+            <p style="color: #5f6368; font-size: 13px; line-height: 1.8;">________________________________________________________________</p>
+        </div>
+        
+        <div class="section-title">KEY ACHIEVEMENTS & COST SAVING INITIATIVES</div>
+        
+        <div style="border: 1px solid #dadce0; border-radius: 8px; min-height: 80px; padding: 15px; margin-bottom: 20px;">
+            <p style="color: #5f6368; font-size: 13px; line-height: 1.8;">________________________________________________________________</p>
+            <p style="color: #5f6368; font-size: 13px; line-height: 1.8;">________________________________________________________________</p>
+        </div>
+        
+        <div class="signature-section">
+            <div class="signature-box">
+                <div class="label">Prepared By (HR Admin)</div>
+                <div class="line">Name & Signature</div>
+                <div class="line">Date: __/__/____</div>
+            </div>
+            <div class="signature-box">
+                <div class="label">Reviewed By (HR Manager)</div>
+                <div class="line">Name & Signature</div>
+                <div class="line">Date: __/__/____</div>
+            </div>
+            <div class="signature-box">
+                <div class="label">Received By (Finance)</div>
+                <div class="line">Name & Signature</div>
+                <div class="line">Date: __/__/____</div>
+            </div>
+        </div>
+        
+        <div class="watermark">NursingCare.pk - HR Department</div>
+        <div class="page-number">Page 6 of 6</div>
+    </div>
+
+</body>
+</html>
