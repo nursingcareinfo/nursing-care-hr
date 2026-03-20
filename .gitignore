@@ -48,3 +48,19 @@ n8n/data/
 # System files
 *.bak
 *.backup
+
+# Agent/Session files
+.agents/
+.claude/
+.sisyphus/
+
+# Test artifacts
+*.png
+*.jpg
+*.jpeg
+
+# Old exports
+qwen-code-export-*.json
+
+# Skills
+skills-lock.json
