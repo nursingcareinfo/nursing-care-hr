@@ -1,2 +1,50 @@
-\n.worktrees/
-\ndata/exports/*.csv
+# Dependencies
+node_modules/
+frontend/node_modules/
+
+# Build outputs
+frontend/.next/
+frontend/out/
+frontend/dist/
+.next/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Temporary files
+*.tmp
+*.temp
+
+# Exports (keep directory, ignore contents)
+data/exports/*
+!data/exports/.gitkeep
+
+# Worktrees
+.worktrees/
+
+# Supabase temp
+supabase/.temp/
+
+# n8n data
+n8n/data/
+
+# System files
+*.bak
+*.backup

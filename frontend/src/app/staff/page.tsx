@@ -1,16 +1,19 @@
 'use client'
+
 import { useState, useEffect } from 'react'
-import Sidebar from '@/components/Sidebar'
 import { supabase } from '@/lib/supabase'
+import { Header } from '@/components/Header'
+import { Card } from '@/components/ui/Card'
+import { Badge } from '@/components/ui/Badge'
+import { Spinner } from '@/components/ui/Spinner'
+import { Button } from '@/components/ui/Button'
+import { Input } from '@/components/ui/Input'
 import { 
   Search, 
   Plus, 
   Filter, 
   Download,
   MoreVertical,
-  Phone,
-  Mail,
-  MapPin,
   Shield,
   Loader2
 } from 'lucide-react'
@@ -64,128 +67,139 @@ export default function StaffPage() {
 
   if (loading) {
     return (
-      <div className="flex">
-        <Sidebar />
-        <main className="main-content flex items-center justify-center">
-          <div className="flex items-center gap-3 text-gray-500">
-            <Loader2 className="w-6 h-6 animate-spin" />
-            <span>Loading staff...</span>
-          </div>
-        </main>
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="flex items-center gap-3 text-on-surface-variant">
+          <Spinner />
+          <span>Loading staff...</span>
+        </div>
       </div>
     )
   }
+
   return (
-    <div className="flex">
-      <Sidebar />
-      <main className="main-content">
-        <header className="bg-white border-b border-gray-200 px-8 py-5">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl font-bold">Staff Management</h1>
-              <p className="text-gray-500">Manage your 1200+ nursing staff</p>
-            </div>
-            <div className="flex gap-3">
-              <button className="btn bg-gray-100 text-gray-700 hover:bg-gray-200">
-                <Download className="w-4 h-4 mr-2" />
-                Export
-              </button>
-              <button className="btn btn-primary">
-                <Plus className="w-4 h-4 mr-2" />
-                Add Staff
-              </button>
-            </div>
-          </div>
-        </header>
+    <div className="min-h-screen bg-background">
+      <Header 
+        title="Staff Management" 
+        subtitle={`Manage your ${staff.length} nursing staff`}
+        actions={
+          <>
+            <Button variant="secondary">
+              <Download className="w-4 h-4" />
+              Export
+            </Button>
+            <Button>
+              <Plus className="w-4 h-4" />
+              Add Staff
+            </Button>
+          </>
+        }
+      />
 
-        <div className="p-8">
-          <div className="card mb-6">
-            <div className="flex flex-wrap gap-4">
-              <div className="flex-1 min-w-[200px]">
-                <div className="relative">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                  <input 
-                    type="text" 
-                    placeholder="Search by name, ID, CNIC..." 
-                    className="input pl-10"
-                  />
-                </div>
+      <div className="p-8">
+        <Card className="mb-6">
+          <div className="flex flex-wrap gap-4">
+            <div className="flex-1 min-w-[200px]">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-on-surface-variant" />
+                <Input 
+                  type="text" 
+                  placeholder="Search by name, ID, CNIC..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10"
+                />
               </div>
-              <select className="input w-auto">
-                {designations.map(d => (
-                  <option key={d} value={d}>{d}</option>
-                ))}
-              </select>
-              <select className="input w-auto">
-                {districts.map(d => (
-                  <option key={d} value={d}>{d}</option>
-                ))}
-              </select>
-              <select className="input w-auto">
-                {statuses.map(s => (
-                  <option key={s} value={s}>{s}</option>
-                ))}
-              </select>
-              <button className="btn bg-gray-100 text-gray-700 hover:bg-gray-200">
-                <Filter className="w-4 h-4 mr-2" />
-                More Filters
-              </button>
             </div>
+            <select 
+              className="px-4 py-2.5 rounded-lg bg-surface-container-highest text-on-surface"
+              value={selectedDesignation}
+              onChange={(e) => setSelectedDesignation(e.target.value)}
+            >
+              {designations.map(d => (
+                <option key={d} value={d}>{d}</option>
+              ))}
+            </select>
+            <select 
+              className="px-4 py-2.5 rounded-lg bg-surface-container-highest text-on-surface"
+              value={selectedDistrict}
+              onChange={(e) => setSelectedDistrict(e.target.value)}
+            >
+              {districts.map(d => (
+                <option key={d} value={d}>{d}</option>
+              ))}
+            </select>
+            <select 
+              className="px-4 py-2.5 rounded-lg bg-surface-container-highest text-on-surface"
+              value={selectedStatus}
+              onChange={(e) => setSelectedStatus(e.target.value)}
+            >
+              {statuses.map(s => (
+                <option key={s} value={s}>{s}</option>
+              ))}
+            </select>
+            <Button variant="secondary">
+              <Filter className="w-4 h-4" />
+              More Filters
+            </Button>
           </div>
+        </Card>
 
-          <div className="card">
-            <table className="table">
+        <Card>
+          <div className="overflow-x-auto">
+            <table className="w-full">
               <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Name</th>
-                  <th>Designation</th>
-                  <th>Contact</th>
-                  <th>District</th>
-                  <th>Status</th>
-                  <th>PNC Expiry</th>
-                  <th></th>
+                <tr className="border-b border-outline-variant">
+                  <th className="text-left py-4 px-4 font-semibold text-on-surface">ID</th>
+                  <th className="text-left py-4 px-4 font-semibold text-on-surface">Name</th>
+                  <th className="text-left py-4 px-4 font-semibold text-on-surface">Designation</th>
+                  <th className="text-left py-4 px-4 font-semibold text-on-surface">Contact</th>
+                  <th className="text-left py-4 px-4 font-semibold text-on-surface">District</th>
+                  <th className="text-left py-4 px-4 font-semibold text-on-surface">Status</th>
+                  <th className="text-left py-4 px-4 font-semibold text-on-surface">PNC Expiry</th>
+                  <th className="text-left py-4 px-4"></th>
                 </tr>
               </thead>
               <tbody>
                 {filteredStaff.map((s) => (
-                  <tr key={s.id}>
-                    <td className="font-mono text-sm">{s.assigned_id}</td>
-                    <td className="font-medium">{s.full_name}</td>
-                    <td>
-                      <span className="badge badge-info">{s.designation}</span>
+                  <tr key={s.id} className="border-b border-surface-container-low hover:bg-surface-container-lowest">
+                    <td className="py-4 px-4 font-mono text-sm text-on-surface-variant">{s.assigned_id}</td>
+                    <td className="py-4 px-4 font-medium text-on-surface">{s.full_name}</td>
+                    <td className="py-4 px-4">
+                      <Badge variant="info">{s.designation}</Badge>
                     </td>
-                    <td className="text-sm">{s.contact_1}</td>
-                    <td className="text-sm">{s.official_district}</td>
-                    <td>
-                      <span className="badge badge-success">{s.status}</span>
+                    <td className="py-4 px-4 text-sm text-on-surface-variant">{s.contact_1}</td>
+                    <td className="py-4 px-4 text-sm text-on-surface-variant">{s.official_district}</td>
+                    <td className="py-4 px-4">
+                      <Badge variant="success">{s.status}</Badge>
                     </td>
-                    <td>
+                    <td className="py-4 px-4">
                       <div className="flex items-center gap-2">
-                        <Shield className="w-4 h-4 text-gray-400" />
-                        <span className="text-sm">{s.pnc_expiry || 'N/A'}</span>
+                        <Shield className="w-4 h-4 text-on-surface-variant" />
+                        <span className="text-sm text-on-surface-variant">{s.pnc_expiry || 'N/A'}</span>
                       </div>
                     </td>
-                    <td>
-                      <button className="p-2 hover:bg-gray-100 rounded">
-                        <MoreVertical className="w-4 h-4 text-gray-400" />
+                    <td className="py-4 px-4">
+                      <button className="p-2 hover:bg-surface-container-low rounded-lg transition-colors">
+                        <MoreVertical className="w-4 h-4 text-on-surface-variant" />
                       </button>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
+          </div>
 
-            <div className="flex items-center justify-between mt-4 pt-4 border-t">
-              <p className="text-sm text-gray-500">Showing 1-5 of 1,200 staff members</p>
-              <div className="flex gap-2">
-                <button className="btn bg-gray-100 text-gray-700" disabled>Previous</button>
-                <button className="btn bg-gray-100 text-gray-700">Next</button>
-              </div>
+          <div className="flex items-center justify-between mt-6 pt-4 border-t border-outline-variant">
+            <p className="text-sm text-on-surface-variant">
+              Showing {filteredStaff.length} of {staff.length} staff members
+            </p>
+            <div className="flex gap-2">
+              <Button variant="secondary" disabled>Previous</Button>
+              <Button variant="secondary">Next</Button>
             </div>
           </div>
-        </div>
-      </main>
+        </Card>
+      </div>
     </div>
   )
 }

@@ -384,3 +384,14 @@
 | NC-KHI-384 | Khurram Shahzad | Yaqoob Masih | 15/12/1984 | Male | 42301-7287675-5 | Attendant | 0347-2972249 | Korangi | Christian | Married | 41 | No record | Urdu, English |
 | NC-KHI-385 | Azmat Rasool | Mukhtar Ahmed | 02/02/2000 | No record | 42401-9788051-7 | Nurse | 03042276757 | Baldia | Islam | Single | 26 | No record | English, Urdu, Pashto |
 | NC-KHI-386 | Shahab Khan | Muhammad Siyaj | 18/03/1996 | Male | 15603-0354060-5 | Attendant | 0346-9840431 | Baldia | Islam | Single | 30 | Easypaisa | Urdu, Pashto |
+| NC-KHI-387 | Surrya | Samson Jalal | 19/06/1984 | Female | 36502-1232934-6 | Staff Nurse | 0309-3761914 | Korangi | Christian | Married | 41 | No record | English, Urdu, Punjabi |
+| NC-KHI-388 | Zarish | Masood | No record | Female | 42201-808734-18 | R.N.R.M | 0303-4312229 | Karachi | Christian | Single | No record | JazzCash | English, Urdu |
+| NC-KHI-389 | Natasha | M.S. Paul | 13/05/2004 | Female | 42301-44204469-2 | Nursing Diploma Continuing | 0349-4114346 | Karachi | Christian | Single | 21 | EasyPaisa | English, Urdu, Punjabi |
+| NC-KHI-390 | Rubina Khan | Riazal Habib | No record | Female | 31202-117949-48 | R.N | 0303-0175947 | Karachi | Christian | Married | No record | Easypaisa | Urdu, English |
+| NC-KHI-391 | Rukhsana Bashir | Bashir Masih | 10/06/1994 | Female | 36104-3958381-4 | No record | 0303-2268485 | Karachi | Christian | Single | 31 | No record | Urdu, English |
+| NC-KHI-392 | Rupa | Qaiser | No record | Female | 42201-5574937-2 | R.N | 0344-2413635 | Korangi | Christian | Married | No record | Easypaisa | English, Urdu, Punjabi |
+| NC-KHI-393 | Niman Afram | Aslam Parvez | No record | Female | 42201-5441581-2 | Staff Nurse | 0345-0661188 | Karachi | Christian | Single | No record | No record | Urdu |
+| NC-KHI-394 | Samval Carvan | Pervez | No record | Female | 42301-1095287-4 | Staff Nurse | 0340-5364433 | Karachi | Christian | Married | No record | Jazz Cash | Urdu, Punjabi, English |
+| NC-KHI-395 | Hira Akhter | Rafaqat Ali | 28/12/1998 | Female | 42201-7352099-0 | RN | 0347-3337235 | Karachi | Islam | Single | 27 | No record | Urdu |
+| NC-KHI-396 | Shamaila Akbhar | Javaid Akthar | 21/11/1982 | Female | 42000-5159012-4 | No record | No record | Karachi | No record | Single | 43 | No record | No record |
+| NC-KHI-397 | Nasheen Munawar | Munawar Mashi | 20/04/1991 | Female | 42201-7124925-2 | RN | 0322-0824455 | Karachi | Christian | Single | 34 | Easypaisa | Urdu, English |

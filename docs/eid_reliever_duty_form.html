@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Eid Holiday Reliever Duty Form - Filled Example</title>
+  <style>
+    @page { size: A4; margin: 12mm; }
+    body { 
+      font-family: Arial, sans-serif; 
+      font-size: 9px; 
+      margin: 0; 
+      padding: 8px;
+      max-width: 210mm;
+    }
+    h1 { 
+      text-align: center; 
+      font-size: 16px; 
+      margin: 0 0 3px 0;
+      text-transform: uppercase;
+    }
+    .subtitle {
+      text-align: center;
+      font-size: 11px;
+      margin-bottom: 8px;
+    }
+    .header-info {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      border: 1px solid #000;
+      padding: 6px;
+      margin-bottom: 8px;
+      font-size: 9px;
+    }
+    .header-field {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .filled { background: #e8f5e9; }
+    .header-field input {
+      border: none;
+      border-bottom: 1px solid #000;
+      width: 80px;
+      font-size: 9px;
+    }
+    table { 
+      width: 100%; 
+      border-collapse: collapse; 
+      margin-bottom: 8px;
+      font-size: 8px;
+    }
+    th, td { 
+      border: 1px solid #000; 
+      padding: 3px 4px; 
+      text-align: left;
+      vertical-align: middle;
+    }
+    th { 
+      background: #e0e0e0; 
+      font-weight: bold;
+      text-align: center;
+      font-size: 7px;
+    }
+    .section-title {
+      background: #333;
+      color: white;
+      font-weight: bold;
+      text-align: center;
+      padding: 4px;
+      margin: 10px 0 3px 0;
+      font-size: 10px;
+    }
+    .signatures {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+    }
+    .signature-box {
+      width: 30%;
+      border-top: 1px solid #000;
+      text-align: center;
+      padding-top: 3px;
+      font-size: 8px;
+    }
+    .notes-area {
+      border: 1px solid #000;
+      min-height: 40px;
+      padding: 4px;
+      margin-top: 8px;
+      font-size: 8px;
+    }
+    .payment-section {
+      background: #f5f5f5;
+      border: 1px solid #000;
+      padding: 6px;
+      margin-top: 8px;
+    }
+    .payment-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      font-size: 9px;
+      margin-bottom: 4px;
+    }
+    .payment-field {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .payment-field input {
+      border: none;
+      border-bottom: 1px solid #000;
+      width: 60px;
+      font-size: 9px;
+    }
+    .total-box {
+      background: #333;
+      color: white;
+      padding: 4px 8px;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 5px;
+    }
+    .info-box {
+      border: 1px solid #666;
+      padding: 4px;
+      margin-bottom: 8px;
+      font-size: 8px;
+      background: #f9f9f9;
+    }
+    .example-note {
+      text-align: center;
+      color: #666;
+      font-size: 8px;
+      margin-bottom: 5px;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <p class="example-note">*** SAMPLE FILLED EXAMPLE - FOR DEMONSTRATION ***</p>
+  
+  <h1>Eid-Ul-Fitr Holiday Reliever Duty Form</h1>
+  <p class="subtitle">NursingCare.pk - Karachi | Staff Scheduling & Payment Record</p>
+  
+  <div class="header-info">
+    <div class="header-field">
+      <strong>Holiday Period:</strong> 
+      <input type="text" value="March 30" class="filled"> to <input type="text" value="April 1" class="filled">
+    </div>
+    <div class="header-field">
+      <strong>Year:</strong> <input type="text" value="2026" style="width:50px" class="filled">
+    </div>
+    <div class="header-field">
+      <strong>Prepared by:</strong> <input type="text" value="Theo (HR Manager)" style="width:100px" class="filled">
+    </div>
+    <div class="header-field">
+      <strong>Date:</strong> <input type="text" value="March 18, 2026" style="width:70px" class="filled">
+    </div>
+  </div>
+
+  <div class="info-box">
+    <strong>Note:</strong> Reliever staff will receive <strong>same daily rate</strong> as the staff they are covering. No holiday bonus applies.
+  </div>
+
+  <div class="section-title">PART A - MUSLIM STAFF (ON EID LEAVE)</div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:7%">ID</th>
+        <th style="width:14%">Name</th>
+        <th style="width:9%">District</th>
+        <th style="width:8%">Contact</th>
+        <th style="width:10%">Patient Assigned</th>
+        <th style="width:7%">Daily Rate</th>
+        <th style="width:5%">Eid 1</th>
+        <th style="width:5%">Eid 2</th>
+        <th style="width:5%">Eid 3</th>
+        <th style="width:6%">Total Days</th>
+        <th style="width:9%">Amount Payable</th>
+        <th style="width:7%">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>NC-KHI-298</td>
+        <td>Areesha Khan</td>
+        <td>KDA Scheme</td>
+        <td>0314-2452947</td>
+        <td>Patient #101 - Mr. Ali</td>
+        <td>2,500</td>
+        <td style="text-align:center">✓</td>
+        <td style="text-align:center">✓</td>
+        <td style="text-align:center">✓</td>
+        <td>3</td>
+        <td>7,500</td>
+        <td>□ Paid ■ Pending</td>
+      </tr>
+      <tr>
+        <td>NC-KHI-311</td>
+        <td>Iram</td>
+        <td>Korangi</td>
+        <td>0326-3577962</td>
+        <td>Patient #102 - Mrs. Fatima</td>
+        <td>2,500</td>
+        <td style="text-align:center">✓</td>
+        <td style="text-align:center">✓</td>
+        <td style="text-align:center">✓</td>
+        <td>3</td>
+        <td>7,500</td>
+        <td>□ Paid ■ Pending</td>
+      </tr>
+      <tr>
+        <td>NC-KHI-312</td>
+        <td>Kalsoom</td>
+        <td>Korangi</td>
+        <td>0318-2143300</td>
+        <td>Patient #103 - Baby Sara</td>
+        <td>2,500</td>
+        <td style="text-align:center">✓</td>
+        <td style="text-align:center">✓</td>
+        <td style="text-align:center">✓</td>
+        <td>3</td>
+        <td>7,500</td>
+        <td>□ Paid ■ Pending</td>
+      </tr>
+      <tr>
+        <td>NC-KHI-347</td>
+        <td>Mehreen</td>
+        <td>Landhi</td>
+        <td>0349-3007868</td>
+        <td>Patient #104 - Mr. Hassan</td>
+        <td>2,500</td>
+        <td style="text-align:center">✓</td>
+        <td style="text-align:center">✓</td>
+        <td style="text-align:center">✓</td>
+        <td>3</td>
+        <td>7,500</td>
+        <td>□ Paid ■ Pending</td>
+      </tr>
+      <tr>
+        <td>NC-KHI-350</td>
+        <td>Fahmida Anjum</td>
+        <td>Landhi</td>
+        <td>0311-5777354</td>
+        <td>Patient #105 - Mrs. Zainab</td>
+        <td>2,500</td>
+        <td style="text-align:center">✓</td>
+        <td style="text-align:center">✓</td>
+        <td style="text-align:center">✓</td>
+        <td>3</td>
+        <td>7,500</td>
+        <td>□ Paid ■ Pending</td>
+      </tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+
+  <div class="section-title">PART B - CHRISTIAN STAFF (COVERING DUTY)</div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:7%">ID</th>
+        <th style="width:14%">Name</th>
+        <th style="width:9%">District</th>
+        <th style="width:8%">Contact</th>
+        <th style="width:10%">Patient Covered</th>
+        <th style="width:7%">Daily Rate</th>
+        <th style="width:5%">Eid 1</th>
+        <th style="width:5%">Eid 2</th>
+        <th style="width:5%">Eid 3</th>
+        <th style="width:6%">Total Days</th>
+        <th style="width:9%">Amount Payable</th>
+        <th style="width:7%">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>NC-KHI-346</td>
+        <td>Naseem</td>
+        <td>Korangi</td>
+        <td>0330-3641537</td>
+        <td>Patient #101 - Mr. Ali</td>
+        <td>2,500</td>
+        <td style="text-align:center">✓</td>
+        <td style="text-align:center">✓</td>
+        <td style="text-align:center">✓</td>
+        <td>3</td>
+        <td>7,500</td>
+        <td>□ Paid ■ Pending</td>
+      </tr>
+      <tr>
+        <td>NC-KHI-357</td>
+        <td>Samantha Marry</td>
+        <td>Korangi</td>
+        <td>0342-5601650</td>
+        <td>Patient #102 - Mrs. Fatima</td>
+        <td>2,500</td>
+        <td style="text-align:center">✓</td>
+        <td style="text-align:center">✓</td>
+        <td style="text-align:center">✓</td>
+        <td>3</td>
+        <td>7,500</td>
+        <td>□ Paid ■ Pending</td>
+      </tr>
+      <tr>
+        <td>NC-KHI-349</td>
+        <td>Sonia Ashraf</td>
+        <td>Nazimabad</td>
+        <td>0347-2702192</td>
+        <td>Patient #103 - Baby Sara</td>
+        <td>2,500</td>
+        <td style="text-align:center">✓</td>
+        <td style="text-align:center">✓</td>
+        <td style="text-align:center">✓</td>
+        <td>3</td>
+        <td>7,500</td>
+        <td>□ Paid ■ Pending</td>
+      </tr>
+      <tr>
+        <td>NC-KHI-363</td>
+        <td>Farah Ilyas</td>
+        <td>Mehran Town</td>
+        <td>0344-2410150</td>
+        <td>Patient #104 - Mr. Hassan</td>
+        <td>2,500</td>
+        <td style="text-align:center">✓</td>
+        <td style="text-align:center">✓</td>
+        <td style="text-align:center">✓</td>
+        <td>3</td>
+        <td>7,500</td>
+        <td>□ Paid ■ Pending</td>
+      </tr>
+      <tr>
+        <td>NC-KHI-365</td>
+        <td>Rabia</td>
+        <td>Korangi</td>
+        <td>03408312545</td>
+        <td>Patient #105 - Mrs. Zainab</td>
+        <td>2,500</td>
+        <td style="text-align:center">✓</td>
+        <td style="text-align:center">✓</td>
+        <td style="text-align:center">✓</td>
+        <td>3</td>
+        <td>7,500</td>
+        <td>□ Paid ■ Pending</td>
+      </tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+
+  <div class="payment-section">
+    <strong>PAYMENT SUMMARY</strong>
+    <div class="payment-row">
+      <div class="payment-field">Muslim Staff Off: <input type="text" value="5" class="filled"> staff × <input type="text" value="3" class="filled"> days</div>
+      <div class="payment-field">Total: PKR <input type="text" value="37,500" class="filled"></div>
+    </div>
+    <div class="payment-row">
+      <div class="payment-field">Christian Staff On Duty: <input type="text" value="5" class="filled"> staff × <input type="text" value="3" class="filled"> days</div>
+      <div class="payment-field">Total: PKR <input type="text" value="37,500" class="filled"></div>
+    </div>
+    <div class="payment-row">
+      <span class="total-box">GRAND TOTAL: PKR 75,000</span>
+    </div>
+  </div>
+
+  <div class="notes-area">
+    <strong>NOTES / REMARKS:</strong><br>
+    5 Muslim staff on Eid leave, covered by 5 Christian staff. Each staff covers same patient as their Muslim counterpart. Daily rate: PKR 2,500.
+  </div>
+
+  <div class="signatures">
+    <div class="signature-box">HR Manager<br>Signature: __________<br>Date: __________</div>
+    <div class="signature-box">Supervisor<br>Signature: __________<br>Date: __________</div>
+    <div class="signature-box">Approved By<br>Signature: __________<br>Date: __________</div>
+  </div>
+</body>
+</html>

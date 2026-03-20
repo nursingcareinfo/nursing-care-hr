@@ -1,9 +1,10 @@
 import './globals.css'
 import type { Metadata } from 'next'
+import Sidebar from '@/components/Sidebar'
 
 export const metadata: Metadata = {
-  title: 'NursingCare.pk - HR Management System',
-  description: 'Home Nursing Care Business Automation',
+  title: 'HR Manager - Home Nursing Care',
+  description: 'Employee data management system for NursingCare.pk',
 }
 
 export default function RootLayout({
@@ -12,8 +13,15 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body>
+        <div className="flex min-h-screen">
+          <Sidebar />
+          <main className="flex-1 ml-64">
+            {children}
+          </main>
+        </div>
+      </body>
     </html>
   )
 }

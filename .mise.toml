@@ -1,0 +1,7 @@
+[tools]
+node = "25.6.1"
+atac = "latest"
+"aqua:twistedpair/google-cloud-sdk" = "latest"
+
+[project]
+version = "1.0.0"
