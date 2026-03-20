@@ -1,0 +1,350 @@
+{
+  "city": "Karachi",
+  "country": "Pakistan",
+  "coordinates": {
+    "latitude": 24.8608,
+    "longitude": 67.0104
+  },
+  "districts": [
+    {
+      "name": "Karachi Central",
+      "alternateNames": ["Central", "Karachi Central District"],
+      "coordinates": { "latitude": 24.9144, "longitude": 67.0298 },
+      "towns": ["Gulberg Town", "Nazimabad Town", "New Karachi Town", "Shah Faisal Town"]
+    },
+    {
+      "name": "Karachi East",
+      "alternateNames": ["East", "Karachi East District"],
+      "coordinates": { "latitude": 24.9207, "longitude": 67.0882 },
+      "towns": ["Gulshan-e-Iqbal Town", "Jamshed Town", "Gulshan-e-Iqbal", "Gulistan Colony"]
+    },
+    {
+      "name": "Karachi South",
+      "alternateNames": ["South", "Karachi South District"],
+      "coordinates": { "latitude": 24.8607, "longitude": 66.9905 },
+      "towns": ["Saddar Town", "Lyari Town", "Clifton", "Empress Market", "Burns Road"]
+    },
+    {
+      "name": "Karachi West",
+      "alternateNames": ["West", "Karachi West District"],
+      "coordinates": { "latitude": 24.8200, "longitude": 66.9200 },
+      "towns": ["Moman Garden", "Orangi Town", "SITE Town", "Machhar Colony"]
+    },
+    {
+      "name": "Korangi",
+      "alternateNames": ["Korangi District"],
+      "coordinates": { "latitude": 24.8200, "longitude": 67.1200 },
+      "towns": ["Korangi Town", "Shah Faisal", "Model Colony", "Dar-ul-Sukun"]
+    },
+    {
+      "name": "Malir",
+      "alternateNames": ["Malir District"],
+      "coordinates": { "latitude": 24.9029, "longitude": 67.1976 },
+      "towns": ["Malir Town", "Malir Cantonment", "Model Colony", "Khadra"]
+    },
+    {
+      "name": "Keamari",
+      "alternateNames": ["Keamari District", "Kiamari"],
+      "coordinates": { "latitude": 24.8167, "longitude": 66.9833 },
+      "towns": ["Keamari Town", "Saddar", "Maripur", "Baba Island"]
+    }
+  ],
+  "areas": [
+    {
+      "name": "Gulshan-e-Iqbal",
+      "district": "Karachi East",
+      "coordinates": { "latitude": 24.9167, "longitude": 67.0833 },
+      "keywords": ["Gulshan", "Gulshan Iqbal", "Gulshan-e-Iqbal Block"]
+    },
+    {
+      "name": "Clifton",
+      "district": "Karachi South",
+      "coordinates": { "latitude": 24.8167, "longitude": 67.0333 },
+      "keywords": ["Clifton", "Clifton Block", "Sea View"]
+    },
+    {
+      "name": "Saddar",
+      "district": "Karachi South",
+      "coordinates": { "latitude": 24.8585, "longitude": 67.0019 },
+      "keywords": ["Saddar", "Bazaar", "Booth Road", "M.A. Jinnah Road"]
+    },
+    {
+      "name": "Nazimabad",
+      "district": "Karachi Central",
+      "coordinates": { "latitude": 24.9144, "longitude": 67.0298 },
+      "keywords": ["Nazimabad", "Nazimabad Colony"]
+    },
+    {
+      "name": "New Karachi",
+      "district": "Karachi Central",
+      "coordinates": { "latitude": 24.9999, "longitude": 67.0648 },
+      "keywords": ["New Karachi", "New Karachi Town"]
+    },
+    {
+      "name": "Gulberg",
+      "district": "Karachi Central",
+      "coordinates": { "latitude": 24.9200, "longitude": 67.0500 },
+      "keywords": ["Gulberg", "Gulberg Town", "Gulberg Chowk"]
+    },
+    {
+      "name": "Jamshed Road",
+      "district": "Karachi East",
+      "coordinates": { "latitude": 24.9100, "longitude": 67.0900 },
+      "keywords": ["Jamshed", "Jamshed Road", "Jamshed Town", "Nawab Colony"]
+    },
+    {
+      "name": "Orangi Town",
+      "district": "Karachi West",
+      "coordinates": { "latitude": 24.8900, "longitude": 66.9500 },
+      "keywords": ["Orangi", "Orangi Town", "Orangi Baand"]
+    },
+    {
+      "name": "Korangi",
+      "district": "Korangi",
+      "coordinates": { "latitude": 24.8200, "longitude": 67.1200 },
+      "keywords": ["Korangi", "Korangi Town", "Korangi Industrial Area"]
+    },
+    {
+      "name": "Shah Faisal",
+      "district": "Karachi East",
+      "coordinates": { "latitude": 24.8800, "longitude": 67.0800 },
+      "keywords": ["Shah Faisal", "Shah Faisal Colony", "Faisal"]
+    },
+    {
+      "name": "Malir",
+      "district": "Malir",
+      "coordinates": { "latitude": 24.9029, "longitude": 67.1976 },
+      "keywords": ["Malir", "Malir Cantonment", "Malir Town", "Khadra"]
+    },
+    {
+      "name": "Lyari",
+      "district": "Karachi South",
+      "coordinates": { "latitude": 24.8600, "longitude": 66.9700 },
+      "keywords": ["Lyari", "Lyari Town", "Bagdad", "Rangiwara"]
+    },
+    {
+      "name": "Keamari",
+      "district": "Keamari",
+      "coordinates": { "latitude": 24.8167, "longitude": 66.9833 },
+      "keywords": ["Keamari", "Kiamari", "Keamari Town"]
+    },
+    {
+      "name": "Model Colony",
+      "district": "Malir",
+      "coordinates": { "latitude": 24.9000, "longitude": 67.1500 },
+      "keywords": ["Model Colony", "Model Town"]
+    },
+    {
+      "name": "Landhi",
+      "district": "Korangi",
+      "coordinates": { "latitude": 24.8500, "longitude": 67.1000 },
+      "keywords": ["Landhi", "Landhi Town", "Majeed Colony"]
+    },
+    {
+      "name": "Kharadar",
+      "district": "Karachi South",
+      "coordinates": { "latitude": 24.8500, "longitude": 66.9800 },
+      "keywords": ["Kharadar", "Kharadar Bazaar"]
+    },
+    {
+      "name": "M.A. Jinnah Road",
+      "district": "Karachi South",
+      "coordinates": { "latitude": 24.8600, "longitude": 66.9900 },
+      "keywords": ["M.A. Jinnah", "Jinnah Road", "M.A. Jinnah Road"]
+    },
+    {
+      "name": "PECHS",
+      "district": "Karachi East",
+      "coordinates": { "latitude": 24.9000, "longitude": 67.0700 },
+      "keywords": ["PECHS", "P.E.C.H.S.", "Pakistan Employees Cooperative Housing Society"]
+    },
+    {
+      "name": "Garden",
+      "district": "Karachi South",
+      "coordinates": { "latitude": 24.8700, "longitude": 66.9800 },
+      "keywords": ["Garden", "Garden East", "Garden West"]
+    },
+    {
+      "name": "Gulistan Colony",
+      "district": "Karachi East",
+      "coordinates": { "latitude": 24.9100, "longitude": 67.1000 },
+      "keywords": ["Gulistan", "Gulistan Colony"]
+    },
+    {
+      "name": "Zia Colony",
+      "district": "Korangi",
+      "coordinates": { "latitude": 24.8400, "longitude": 67.1100 },
+      "keywords": ["Zia", "Zia Colony"]
+    },
+    {
+      "name": "Al-Falah Colony",
+      "district": "Karachi East",
+      "coordinates": { "latitude": 24.9250, "longitude": 67.0750 },
+      "keywords": ["Al-Falah", "AlFalah", "Al Falah Colony"]
+    },
+    {
+      "name": "North Karachi",
+      "district": "Karachi Central",
+      "coordinates": { "latitude": 24.9700, "longitude": 67.0600 },
+      "keywords": ["North Karachi", "North Karachi Town"]
+    },
+    {
+      "name": "Gulshan-e-Shareef",
+      "district": "Karachi East",
+      "coordinates": { "latitude": 24.9300, "longitude": 67.0900 },
+      "keywords": ["Gulshan Shareef", "Gulshan-e-Shareef"]
+    },
+    {
+      "name": "Gadap",
+      "district": "Karachi West",
+      "coordinates": { "latitude": 24.8500, "longitude": 66.9200 },
+      "keywords": ["Gadap", "Gadap Town", "Gadap City"]
+    },
+    {
+      "name": "Baldia",
+      "district": "Karachi West",
+      "coordinates": { "latitude": 24.8700, "longitude": 66.9000 },
+      "keywords": ["Baldia", "Baldia Town"]
+    },
+    {
+      "name": "SITE",
+      "district": "Karachi West",
+      "coordinates": { "latitude": 24.8800, "longitude": 66.9300 },
+      "keywords": ["SITE", "SITE Town", "SITE Area"]
+    },
+    {
+      "name": "Metroville",
+      "district": "Karachi Central",
+      "coordinates": { "latitude": 24.9400, "longitude": 67.0500 },
+      "keywords": ["Metroville", "Metro Ville"]
+    },
+    {
+      "name": "Shahalam",
+      "district": "Karachi Central",
+      "coordinates": { "latitude": 24.9500, "longitude": 67.0400 },
+      "keywords": ["Shahalam", "Shahalam Market"]
+    },
+    {
+      "name": "Gulshan-e-Maymar",
+      "district": "Karachi East",
+      "coordinates": { "latitude": 24.9400, "longitude": 67.1100 },
+      "keywords": ["Gulshan Maymar", "Gulshan-e-Maymar", "Maymar"]
+    },
+    {
+      "name": "Hawkes Bay",
+      "district": "Karachi West",
+      "coordinates": { "latitude": 24.8200, "longitude": 66.8900 },
+      "keywords": ["Hawkes Bay", "Hawkesbay"]
+    },
+    {
+      "name": "Mauripur",
+      "district": "Keamari",
+      "coordinates": { "latitude": 24.8300, "longitude": 66.9700 },
+      "keywords": ["Mauripur", "Maripur", "Mehran"]
+    },
+    {
+      "name": "Kemari",
+      "district": "Keamari",
+      "coordinates": { "latitude": 24.8100, "longitude": 66.9800 },
+      "keywords": ["Kemari", "Keamari Port"]
+    },
+    {
+      "name": "Bin Qasim",
+      "district": "Malir",
+      "coordinates": { "latitude": 24.8800, "longitude": 67.2500 },
+      "keywords": ["Bin Qasim", "BinQasim", "Port Qasim"]
+    },
+    {
+      "name": "Steel Town",
+      "district": "Malir",
+      "coordinates": { "latitude": 24.8900, "longitude": 67.2000 },
+      "keywords": ["Steel Town", "Steel Mill"]
+    },
+    {
+      "name": "Jamshed Quarters",
+      "district": "Karachi East",
+      "coordinates": { "latitude": 24.9050, "longitude": 67.0850 },
+      "keywords": ["Jamshed Quarters", "Jamshed"]
+    },
+    {
+      "name": "Paposh Nagar",
+      "district": "Karachi East",
+      "coordinates": { "latitude": 24.9150, "longitude": 67.0650 },
+      "keywords": ["Paposh", "Paposh Nagar", "Nagina"]
+    },
+    {
+      "name": "Federal B Area",
+      "district": "Karachi Central",
+      "coordinates": { "latitude": 24.9050, "longitude": 67.0450 },
+      "keywords": ["Federal B", "Federal B Area", "Block 1", "Block 2"]
+    },
+    {
+      "name": "Yaseenabad",
+      "district": "Karachi Central",
+      "coordinates": { "latitude": 24.9100, "longitude": 67.0550 },
+      "keywords": ["Yaseenabad", "Yasinabad", "Yousuf Plaza"]
+    },
+    {
+      "name": "Liaquatabad",
+      "district": "Karachi Central",
+      "coordinates": { "latitude": 24.9200, "longitude": 67.0350 },
+      "keywords": ["Liaquatabad", "Liaquatabad Town"]
+    },
+    {
+      "name": "Manghopir",
+      "district": "Karachi West",
+      "coordinates": { "latitude": 24.9000, "longitude": 66.9200 },
+      "keywords": ["Manghopir", "Manghopir Road"]
+    },
+    {
+      "name": "Rashid Minhas Road",
+      "district": "Karachi East",
+      "coordinates": { "latitude": 24.8950, "longitude": 67.0750 },
+      "keywords": ["Rashid Minhas", "Rashid Minhas Road", "Gulshan Chowrangi"]
+    },
+    {
+      "name": "University Road",
+      "district": "Karachi East",
+      "coordinates": { "latitude": 24.9350, "longitude": 67.0650 },
+      "keywords": ["University Road", "University", "Jinnah College"]
+    },
+    {
+      "name": "Marriot Road",
+      "district": "Karachi South",
+      "coordinates": { "latitude": 24.8650, "longitude": 66.9850 },
+      "keywords": ["Marriot", "Marriot Road", "Head Office"]
+    },
+    {
+      "name": "Ibrahim Hyderi",
+      "district": "Keamari",
+      "coordinates": { "latitude": 24.8000, "longitude": 66.9700 },
+      "keywords": ["Ibrahim Hyderi", "Hyderi", "Fishing Community"]
+    },
+    {
+      "name": "Gujjar Nala",
+      "district": "Karachi West",
+      "coordinates": { "latitude": 24.8850, "longitude": 66.9350 },
+      "keywords": ["Gujjar", "Gujjar Nala", "Chishti Nagar"]
+    },
+    {
+      "name": "Akhtar Colony",
+      "district": "Karachi East",
+      "coordinates": { "latitude": 24.9000, "longitude": 67.0800 },
+      "keywords": ["Akhtar", "Akhtar Colony"]
+    },
+    {
+      "name": "Liyari",
+      "district": "Karachi South",
+      "coordinates": { "latitude": 24.8550, "longitude": 66.9750 },
+      "keywords": ["Liyari", "Lyari", "Chakla"]
+    }
+  ],
+  "commonKeywords": {
+    "Town": "Town is often part of district name",
+    "Colony": "Residential area/neighborhood",
+    "Scheme": "Planned development area (e.g., Scheme 24)",
+    "Sector": "Block in planned areas",
+    "Block": "Area subdivision",
+    "Phase": "Phase of housing society"
+  }
+}
