@@ -6,10 +6,14 @@
     "scripts": {
         "test": "node scripts/test_validator.js",
         "export:sheets": "node scripts/export_to_sheets.js",
+        "export:sheets:status": "node scripts/export_to_sheets.js --status",
+        "export:sheets:reset": "node scripts/export_to_sheets.js --reset",
         "export:supabase": "node scripts/export_to_supabase.js",
-        "export:supabase:reset": "node scripts/export_to_supabase.js --reset",
         "export:supabase:status": "node scripts/export_to_supabase.js --status",
-        "export:contacts": "node scripts/export_google_contacts.js"
+        "export:supabase:reset": "node scripts/export_to_supabase.js --reset",
+        "export:contacts": "node scripts/export_google_contacts.js",
+        "export:contacts:status": "node scripts/export_google_contacts.js --status",
+        "export:contacts:reset": "node scripts/export_google_contacts.js --reset"
     },
     "dependencies": {
         "@supabase/supabase-js": "^2.98.0",

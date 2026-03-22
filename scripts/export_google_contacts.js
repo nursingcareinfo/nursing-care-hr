@@ -1,12 +1,16 @@
 /**
  * Export Local Staff Records to Google Contacts CSV
- * Usage: node scripts/export_google_contacts.js
+ * Usage: 
+ *   node scripts/export_google_contacts.js        - Export new records
+ *   node scripts/export_google_contacts.js --status - Check status
+ *   node scripts/export_google_contacts.js --reset  - Reset state and re-export all
  * 
  * This script prepares a CSV file that can be imported into Google Contacts,
  * which then syncs with WhatsApp Business to manage staff contacts.
  * It parses the local master_staff_report.md file directly.
  * 
  * IMPORTANT: Google Contacts CSV uses COLUMN POSITION to identify fields.
+ * State tracking prevents redundant exports of unchanged records.
  */
 
 const fs = require('fs');
@@ -15,6 +19,82 @@ const { createObjectCsvWriter } = require('csv-writer');
 
 const REPORT_PATH = path.join(__dirname, '../data/master_report/master_staff_report.md');
 const OUTPUT_PATH = path.join(__dirname, '../data/exports/google_contacts_import.csv');
+const STATE_FILE = path.join(__dirname, '../data/.google_contacts_export_state.json');
+
+/**
+ * Loads previously exported record IDs from state file.
+ * @returns {Set<string>} - Set of exported record IDs.
+ */
+function loadExportedIds() {
+    try {
+        if (fs.existsSync(STATE_FILE)) {
+            const data = JSON.parse(fs.readFileSync(STATE_FILE, 'utf8'));
+            return new Set(data.exportedIds || []);
+        }
+    } catch (error) {
+        console.warn('Could not load export state:', error.message);
+    }
+    return new Set();
+}
+
+/**
+ * Saves exported record IDs to state file.
+ * @param {Set<string>} ids - Set of exported record IDs.
+ */
+function saveExportedIds(ids) {
+    try {
+        const stateData = {
+            exportedIds: Array.from(ids),
+            lastExport: new Date().toISOString()
+        };
+        fs.writeFileSync(STATE_FILE, JSON.stringify(stateData, null, 2));
+    } catch (error) {
+        console.error('Failed to save export state:', error.message);
+    }
+}
+
+/**
+ * Resets export state - all records will be re-exported on next run.
+ */
+function resetState() {
+    try {
+        if (fs.existsSync(STATE_FILE)) {
+            fs.unlinkSync(STATE_FILE);
+            console.log('Google Contacts export state reset. All records will be re-exported on next run.');
+        } else {
+            console.log('No export state file found.');
+        }
+    } catch (error) {
+        console.error('Failed to reset export state:', error.message);
+    }
+}
+
+/**
+ * Shows current export status.
+ */
+function showStatus() {
+    try {
+        const exportedIds = loadExportedIds();
+        const allRecords = parseStaffReport();
+        const missingRecords = allRecords.filter(record => !exportedIds.has(record.assigned_id));
+        const totalRecords = allRecords.length;
+        const exportedCount = exportedIds.size;
+        const missingCount = totalRecords - exportedCount;
+
+        console.log('Google Contacts Export Status:');
+        console.log(`  Total records: ${totalRecords}`);
+        console.log(`  Exported: ${exportedCount}`);
+        console.log(`  Missing: ${missingCount}`);
+
+        if (missingCount > 0) {
+            const missingIds = missingRecords.slice(0, 20).map(record => record.assigned_id).join(', ');
+            const truncated = missingRecords.length > 20 ? ', ...' : '';
+            console.log(`  Missing IDs: ${missingIds}${truncated}`);
+        }
+    } catch (error) {
+        console.error('Failed to get export status:', error.message);
+    }
+}
 
 // Format phone number to ensure +92 country code and remove spaces/dashes
 function formatPhone(phone) {
@@ -91,14 +171,22 @@ function parseStaffReport() {
 async function exportContacts() {
     console.log(`Reading staff records from ${REPORT_PATH}...`);
     
-    const staff = parseStaffReport();
+    const exportedIds = loadExportedIds();
+    console.log(`Previously exported: ${exportedIds.size} records`);
     
-    if (!staff || staff.length === 0) {
-        console.log('No staff records found in the report.');
+    const allRecords = parseStaffReport();
+    console.log(`Total records in report: ${allRecords.length}`);
+
+    // Filter to only new records
+    const newRecords = allRecords.filter(record => !exportedIds.has(record.assigned_id));
+
+    if (newRecords.length === 0) {
+        console.log('No new records to export. All records already exported.');
+        showStatus();
         return;
     }
-    
-    console.log(`Found ${staff.length} staff records. Formatting for Google Contacts...`);
+
+    console.log(`New records to export: ${newRecords.length}`);
     
     // Google Contacts CSV - COLUMN ORDER IS CRITICAL!
     const csvWriter = createObjectCsvWriter({
@@ -203,7 +291,7 @@ async function exportContacts() {
         ]
     });
     
-    const records = staff.map(person => {
+    const records = newRecords.map(person => {
         // Split name for Given/Family if possible
         const nameParts = person.name.split(' ');
         const givenName = nameParts[0] || person.name;
@@ -334,7 +422,13 @@ async function exportContacts() {
     });
     
     await csvWriter.writeRecords(records);
-    console.log(`\n✅ Success! Google Contacts CSV generated at: ${OUTPUT_PATH}`);
+    
+    // Update state with newly exported IDs
+    newRecords.forEach(record => exportedIds.add(record.assigned_id));
+    saveExportedIds(exportedIds);
+    
+    console.log(`\n✅ Success! ${newRecords.length} new contacts exported to Google Contacts CSV`);
+    console.log(`   CSV saved to: ${OUTPUT_PATH}`);
     console.log(`\n📋 Contact fields now include:`);
     console.log(`   - Name: Employee name`);
     console.log(`   - Occupation: Designation`);
@@ -344,6 +438,15 @@ async function exportContacts() {
     console.log(`   - Organization Location: District`);
     console.log(`   - Address: District, Karachi, Pakistan`);
     console.log(`   - Phone numbers (callable)`);
+    console.log(`\n📊 Total exported (cumulative): ${exportedIds.size} records`);
 }
 
-exportContacts().catch(console.error);
+// CLI argument handling
+const args = process.argv.slice(2);
+if (args[0] === '--reset') {
+    resetState();
+} else if (args[0] === '--status') {
+    showStatus();
+} else {
+    exportContacts();
+}
